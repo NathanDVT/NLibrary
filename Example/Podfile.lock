@@ -1,0 +1,16 @@
+PODS:
+  - NLibrary (0.1.0)
+
+DEPENDENCIES:
+  - NLibrary (from `../`)
+
+EXTERNAL SOURCES:
+  NLibrary:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  NLibrary: 158ac2e71c6924e1f5069cfcbae5ddd7273c11c2
+
+PODFILE CHECKSUM: 81b3ea2dd232c71a046d140b511951db71838628
+
+COCOAPODS: 1.8.4

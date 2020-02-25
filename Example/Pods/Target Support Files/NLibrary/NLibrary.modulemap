@@ -1,0 +1,6 @@
+framework module NLibrary {
+  umbrella header "NLibrary-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "NLibrary",
+  "version": "0.1.0",
+  "summary": "A short description of NLibrary.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/NathanDVT/NLibrary",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "NathanDVT": "nngobale@jhb.dvt.co.za"
+  },
+  "source": {
+    "git": "https://github.com/NathanDVT/NLibrary.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "NLibrary/Classes/**/*"
+}

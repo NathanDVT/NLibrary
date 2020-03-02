@@ -1,4 +1,4 @@
-public let hi:String = "ds"
+//public let hi:String = "ds"
 
 // MODEL ---------------------------------------------
 public struct ArtistMediaResponse: Decodable {

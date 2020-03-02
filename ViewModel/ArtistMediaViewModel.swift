@@ -1,11 +1,13 @@
 //
-//  ViewModel_ArtistMediaRequest.swift
+//  ArtistMediaViewModel.swift
 //  NLibrary
 //
 //  Created by Nathan Ngobale on 2020/03/02.
 //
 
 import Foundation
+
+// ViewModel --------------------------------------------
 
 public enum ArtistMediaError: Error {
     case noDataAvailable

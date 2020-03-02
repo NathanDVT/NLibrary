@@ -7,17 +7,31 @@
 
 import Foundation
 
-//public struct ArtistMediaResponse: Decodable {
-//    var results: [Collection]
-//}
-//
-//public struct Collection: Decodable {
-//    var artistName: String
-//    var collectionName: String
-//    var releaseDate: String
-//    var artworkUrl30: String
-//    var collectionPrice: Double
-//    var trackTimeMillis: Int
-//    var artworkUrl60: String
-//    var previewUrl: String
-//}
+public struct ArtistMediaResponse: Decodable {
+    public var results: [Collection]
+    public init(){
+        results = []
+    }
+}
+
+public struct Collection: Decodable {
+    public var artistName: String
+    public var collectionName: String
+    public var releaseDate: String
+    public var artworkUrl30: String
+    public var collectionPrice: Double
+    public var trackTimeMillis: Int
+    public var artworkUrl60: String
+    public var previewUrl: String
+    
+    public init(){
+        artistName = ""
+        collectionName = ""
+        releaseDate = ""
+        artworkUrl30 = ""
+        artworkUrl60 = ""
+        previewUrl = ""
+        trackTimeMillis = 0
+        collectionPrice = 0
+    }
+}

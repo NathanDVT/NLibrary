@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct ArtistMediaResponse: Decodable {
+public struct ArtistMediaResponse: Decodable {
     var results: [Collection]
 }
 
-struct Collection: Decodable {
+public struct Collection: Decodable {
     var artistName: String
     var collectionName: String
     var releaseDate: String

@@ -1,6 +1,12 @@
-public let hi:String = "ds"
+//
+//  ArtistMed.swift
+//  NLibrary
+//
+//  Created by Nathan Ngobale on 2020/03/02.
+//
 
-// MODEL ---------------------------------------------
+import Foundation
+
 public struct ArtistMediaResponse: Decodable {
     public var results: [Collection]
     public init(){
@@ -28,5 +34,3 @@ public struct Collection: Decodable {
         collectionPrice = 0
     }
 }
-
-

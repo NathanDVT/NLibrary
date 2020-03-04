@@ -9,35 +9,42 @@ import Foundation
 
 // ViewModel --------------------------------------------
 
-public enum ArtistMediaError: Error {
-    case noDataAvailable
-    case canNotProcessData
+public struct ArtistMediaResponseViewModel: Decodable {
+    public var results: [CollectionViewModel]?
+    public init( artistName: String ){
+        let model = ArtistMediaRequest(artistName: artistName)
+        results = nil
+//        results = convertToViewModel(collectionModels: model.)
+//        print(results)
+    }
 }
 
-public struct ArtistMediaRequest {
-    let resourceURL: URL
-
-    public init(artistName: String) {
-        let resourceString = "https://itunes.apple.com/search?term=\(artistName)"
-        guard let resourceURL = URL(string: resourceString) else {fatalError()}
-        self.resourceURL = resourceURL
+private func convertToViewModel(collectionModels: [Collection]) -> [CollectionViewModel] {
+    var toReturn = [CollectionViewModel]()
+    for collectionModel in collectionModels {
+        toReturn.append(CollectionViewModel())
     }
+    return toReturn
+}
 
-    public func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: resourceURL) { data, _, _ in
-            guard let jsonData = data else {
-                completion(.failure(.noDataAvailable))
-                return
-            }
-            do {
-                let decoder = JSONDecoder()
-                let artistMediaResponse = try decoder.decode(ArtistMediaResponse.self, from: jsonData)
-                let collections = artistMediaResponse.results
-                completion(.success(collections))
-            } catch {
-                completion(.failure(.canNotProcessData))
-            }
-        }
-        dataTask.resume()
+public struct CollectionViewModel: Decodable {
+    public var artistName: String
+    public var collectionName: String
+    public var releaseDate: String
+    public var artworkUrl30: String
+    public var collectionPrice: Double
+    public var trackTimeMillis: Int
+    public var artworkUrl60: String
+    public var previewUrl: String
+    
+    public init(){
+        artistName = "Blank"
+        collectionName = ""
+        releaseDate = ""
+        artworkUrl30 = ""
+        artworkUrl60 = ""
+        previewUrl = ""
+        trackTimeMillis = 0
+        collectionPrice = 0
     }
 }

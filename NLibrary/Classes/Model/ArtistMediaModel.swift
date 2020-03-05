@@ -25,7 +25,7 @@ public struct Collection: Decodable {
     public var trackTimeMillis: Int
     public var artworkUrl60: String
     public var previewUrl: String
-    public init(){
+    public init( ) {
         artistName = ""
         collectionName = ""
         releaseDate = ""

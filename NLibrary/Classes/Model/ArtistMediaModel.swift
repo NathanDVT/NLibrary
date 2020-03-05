@@ -52,7 +52,6 @@ public struct ArtistMediaRequest {
     }
 
     public func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
-        print ("hiiiiiiiii")
         let dataTask = URLSession.shared.dataTask(with: self.resourceURL) { data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))

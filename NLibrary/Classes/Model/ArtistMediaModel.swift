@@ -1,11 +1,41 @@
 //
-//  ViewModel_ArtistMediaRequest.swift
+//  ArtistMedia.swift
 //  NLibrary
 //
 //  Created by Nathan Ngobale on 2020/03/02.
 //
 
 import Foundation
+
+// DTO: Data Transfer Objects
+
+public struct ArtistMediaResponse: Decodable {
+    public var results: [Collection]
+    public init( ) {
+        results = []
+    }
+}
+
+public struct Collection: Decodable {
+    public var artistName: String
+    public var collectionName: String
+    public var releaseDate: String
+    public var artworkUrl30: String
+    public var collectionPrice: Double
+    public var trackTimeMillis: Int
+    public var artworkUrl60: String
+    public var previewUrl: String
+    public init( ) {
+        artistName = ""
+        collectionName = ""
+        releaseDate = ""
+        artworkUrl30 = ""
+        artworkUrl60 = ""
+        previewUrl = ""
+        trackTimeMillis = 0
+        collectionPrice = 0
+    }
+}
 
 public enum ArtistMediaError: Error {
     case noDataAvailable
@@ -22,7 +52,7 @@ public struct ArtistMediaRequest {
     }
 
     public func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: resourceURL) { data, _, _ in
+        let dataTask = URLSession.shared.dataTask(with: self.resourceURL) { data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))
                 return

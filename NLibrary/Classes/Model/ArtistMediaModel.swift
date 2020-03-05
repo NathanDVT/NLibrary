@@ -11,7 +11,7 @@ import Foundation
 
 public struct ArtistMediaResponse: Decodable {
     public var results: [Collection]
-    public init(){
+    public init( ){
         results = []
     }
 }
@@ -70,7 +70,3 @@ public struct ArtistMediaRequest {
         dataTask.resume()
     }
 }
-
-
-
-

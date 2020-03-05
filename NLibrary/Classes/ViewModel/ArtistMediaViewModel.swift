@@ -9,12 +9,11 @@ import Foundation
 
 public class ArtistMediaViewModel {
     public var listOfArtistCollections = [Collection]()
-    public var artistName : String
-    public init (artistName: String)
-    {
+    public var artistName: String
+    public init (artistName: String) {
         self.artistName = artistName
     }
-    
+
     public func getCollections(completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
         let artistMediaRequest = ArtistMediaRequest(artistName: self.artistName)
         artistMediaRequest.getArtistMedia { [weak self] result in

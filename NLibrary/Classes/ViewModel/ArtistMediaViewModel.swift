@@ -15,14 +15,17 @@ public class ArtistMediaViewModel {
     }
 
     public func getCollections(completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
-        let artistMediaRequest = ArtistMediaRequest(artistName: self.artistName)
-        artistMediaRequest.getArtistMedia { [weak self] result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let collections):
-                completion(.success(collections))
+        do {
+            let artistMediaRequest = try ArtistMediaRepo(artistName: self.artistName)
+            artistMediaRequest.getArtistMedia { [weak self] result in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(let collections):
+                    completion(.success(collections))
+                }
             }
-        }
+        } catch {}
+        
     }
 }

@@ -10,7 +10,6 @@ import Foundation
 public protocol ArtistMediaResponseProtocol: class {
     init( ) throws
     var results: [Collection] {get set}
-    
 }
 
 public protocol ArtistMediaRepoProtocol: class {

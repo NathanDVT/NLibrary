@@ -8,7 +8,6 @@
 import Foundation
 
 public class ArtistMediaViewModel {
-    
     public var results: [ArtistMediaViewModelCollection]
 
     public struct ArtistMediaViewModelCollection: Decodable {

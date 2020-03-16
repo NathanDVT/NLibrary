@@ -14,13 +14,10 @@ public class ArtistMediaRepoMock: ArtistMediaRepoProtocol {
     }
 
     public func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
-        guard
-            let path = Bundle.main.path(forResource: "repoResponse1", ofType: "json")
-            else { fatalError("Can't find search.json file") }
-        do {
-        let data = try Data(contentsOf: URL(fileURLWithPath: path))
-        let response = try JSONDecoder().decode( ArtistMediaResponse.self, from: data)
-            completion(.success(response.results))
-        } catch {}
+        guard let jsonUrl = Bundle.main.url(forResource: "repoResponse1", withExtension: "json"),
+                let data = try? Data(contentsOf: jsonUrl),
+                let library = try? JSONDecoder().decode(ArtistMediaResponse.self, from: data) else {
+                    fatalError("Could not load repoResponse1.json")
+            }
     }
 }

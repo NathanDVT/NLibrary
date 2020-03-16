@@ -7,12 +7,14 @@
 
 import Foundation
 // Mocks
-protocol ArtistMediaResponseProtocol: class {
-    init( )
+public protocol ArtistMediaResponseProtocol: class {
+    init( ) throws
     var results: [Collection] {get set}
+    
 }
 
-protocol ArtistMediaRepoProtocol: class {
+public protocol ArtistMediaRepoProtocol: class {
+    //init(artistName: String)
     func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void)
 }
 
@@ -51,6 +53,9 @@ public enum ArtistMediaError: Error {
     case canNotProcessData
     case invalidName
 }
+
+
+//////////////////////// Repository
 
 public class ArtistMediaRepo: ArtistMediaRepoProtocol {
     let resourceURL: URL

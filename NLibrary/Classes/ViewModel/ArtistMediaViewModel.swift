@@ -9,37 +9,41 @@ import Foundation
 
 public class ArtistMediaViewModel {
     
-//    public var results: [ArtistMediaViewModelCollection]
-//        required public init( ) {
-//            results = []
-//        }
-//    }
-//
-//    public struct ArtistMediaViewModelCollection: Decodable {
-//        public var artistName: String
-//        public var collectionName: String
-//        public var releaseDate: String
-//        public var artworkUrl30: String
-//        public var collectionPrice: Double
-//        public var trackTimeMillis: Int
-//        public var artworkUrl60: String
-//        public var previewUrl: String
-//        public init( ) {
-//            artistName = ""
-//            collectionName = ""
-//            releaseDate = ""
-//            artworkUrl30 = ""
-//            artworkUrl60 = ""
-//            previewUrl = ""
-//            trackTimeMillis = 0
-//            collectionPrice = 0
-//        }
-//    }
+    public var results: [ArtistMediaViewModelCollection]
+
+    public struct ArtistMediaViewModelCollection: Decodable {
+        public var artistName: String
+        public var collectionName: String
+        public var releaseDate: String
+        public var artworkUrl30: String
+        public var collectionPrice: Double
+        public var trackTimeHours: Int
+        public var trackTimeMinutes: Int
+        public var artworkUrl60: String
+        public var previewUrl: String
+        
+        public init(collection: Collection ) {
+            self.artistName = collection.artistName
+            self.collectionPrice = collection.collectionPrice
+            self.releaseDate = collection.releaseDate
+            self.artworkUrl30 = collection.artworkUrl30
+            self.collectionName = collection.collectionName
+            self.trackTimeHours = collection.trackTimeMillis / (60*60)
+            self.trackTimeMinutes = collection.trackTimeMillis - (60) / collection.trackTimeMillis
+            self.artworkUrl60 = collection.artworkUrl60
+            self.previewUrl = collection.previewUrl
+            self.collectionPrice = collection.collectionPrice
+            self.releaseDate = collection.releaseDate
+            }
+    }
 
     public var listOfArtistCollections = [Collection]()
     public var artistName: String
-    public init (artistName: String) {
+//    public var repo: ArtistMediaRepoProtocol
+    public init (artistName: String) {//, repo: ArtistMediaRepoProtocol) {
         self.artistName = artistName
+        self.results = []
+//        self.repo = repo
     }
 
     public func getCollections(completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
@@ -54,6 +58,5 @@ public class ArtistMediaViewModel {
                 }
             }
         } catch {}
-        
     }
 }

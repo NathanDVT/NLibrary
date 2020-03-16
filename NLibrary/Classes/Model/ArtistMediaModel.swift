@@ -6,12 +6,22 @@
 //
 
 import Foundation
+// Mocks
+public protocol ArtistMediaResponseProtocol: class {
+    init( ) throws
+    var results: [Collection] {get set}
+}
+
+public protocol ArtistMediaRepoProtocol: class {
+    //init(artistName: String)
+    func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void)
+}
 
 // DTO: Data Transfer Objects
 
-public struct ArtistMediaResponse: Decodable {
+public class ArtistMediaResponse: Decodable, ArtistMediaResponseProtocol {
     public var results: [Collection]
-    public init( ) {
+    required public init( ) {
         results = []
     }
 }
@@ -40,14 +50,18 @@ public struct Collection: Decodable {
 public enum ArtistMediaError: Error {
     case noDataAvailable
     case canNotProcessData
+    case invalidName
 }
 
-public struct ArtistMediaRequest {
+//////////////////////// Repository
+
+public class ArtistMediaRepo: ArtistMediaRepoProtocol {
     let resourceURL: URL
 
-    public init(artistName: String) {
+    public init(artistName: String) throws {
         let resourceString = "https://itunes.apple.com/search?term=\(artistName)"
-        guard let resourceURL = URL(string: resourceString) else {fatalError()}
+        guard let resourceURL = URL(string: resourceString)
+            else { throw ArtistMediaError.invalidName}
         self.resourceURL = resourceURL
     }
 

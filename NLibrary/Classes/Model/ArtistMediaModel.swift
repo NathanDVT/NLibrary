@@ -54,7 +54,6 @@ public enum ArtistMediaError: Error {
     case invalidName
 }
 
-
 //////////////////////// Repository
 
 public class ArtistMediaRepo: ArtistMediaRepoProtocol {
@@ -69,7 +68,6 @@ public class ArtistMediaRepo: ArtistMediaRepoProtocol {
 
     public func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: self.resourceURL) { data, _, _ in
-            
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))
                 return

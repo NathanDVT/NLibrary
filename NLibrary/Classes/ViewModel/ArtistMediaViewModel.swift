@@ -21,7 +21,7 @@ public class ArtistMediaViewModel {
         public var trackTimeMinutes: Int
         public var artworkUrl60: String
         public var previewUrl: String
-        
+
         public init(collection: Collection ) {
             self.artistName = collection.artistName
             self.collectionPrice = collection.collectionPrice

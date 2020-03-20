@@ -7,8 +7,8 @@
 //
 import Foundation
 
-struct User {
+struct UserModel {
     var name: String
-    var surname: String
+    var email: String
     var id: String
 }

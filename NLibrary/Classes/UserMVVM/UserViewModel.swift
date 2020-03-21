@@ -7,22 +7,39 @@
 //
 
 import Foundation
-//
+//---------------------------------------- SignUp Protocol
 
-protocol SignUpVCprotocol : class {
-    func SuccessfulSignIn()
-    func UnsuccessfulSignIn(message: String)
+public protocol SignUpVCprotocol : class {
+    func successfulSignIn()
+    func unsuccessfulSignIn(message: String)
 }
 
-class UserVM {
+//----------------------------------------
+
+public class UserVM {
     var id: String?
     var name: String?
     var email: String?
     weak var signUpVC: SignUpVCprotocol?
-    weak var userRepo: UserRepoProtocol?
+    var userRepo: UserRepoProtocol?
     
-    init( viewController: SignUpVCprotocol, userRepo: UserRepoProtocol) {
+    public init( viewController: SignUpVCprotocol, userRepo: UserRepoProtocol) {
         self.signUpVC = viewController
         self.userRepo = userRepo
+        userRepo.setViewModel(userVM: self)
+    }
+    
+    public func signUp(email: String!, password: String!) {
+        guard let userRepo = userRepo else {
+            fatalError()
+        }
+        userRepo.signUp(email: email, password: password) { result in
+            switch result{
+            case .failedRequest(let message):
+                self.signUpVC?.unsuccessfulSignIn(message: message)
+            case .succesfullRequest:
+                self.signUpVC?.successfulSignIn()
+            }
+        }
     }
 }

@@ -9,24 +9,35 @@ import Foundation
 //import Firebase
 import FirebaseAuth
 
-enum APIRequestResult: Error {
+public enum APIRequestResult: Error {
     case failedRequest(message: String)
     case succesfullRequest
 }
 
-protocol UserRepoProtocol: class {
-    func signIn (email: String, password: String, completion: @escaping(Result<APIRequestResult, APIRequestResult>) -> Void)
+public protocol UserRepoProtocol: class {
+    func signUp (email: String, password: String, completion: @escaping(APIRequestResult) -> Void)
+    func nothing()
+    func setViewModel(userVM: UserVM)
 }
 
-class UserRepo: UserRepoProtocol {
-    func signIn(email: String, password: String, completion: @escaping(Result<APIRequestResult, APIRequestResult>) -> Void) {
-        Auth.auth().createUser(withEmail: email,
-                               password: password) { /*[weak self]*/ authResult, error in
+public class UserRepo: UserRepoProtocol {
+    var userVM: UserVM?
+
+    public init () {}
+
+    public func nothing() {}
+
+    public func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { /*[weak self]*/ authResult, error in
             guard let user = authResult?.user, error == nil else {
-                completion(.failure(.failedRequest(message: error!.localizedDescription))) //message: error!.localizedDescription
+                completion(.failedRequest(message: error!.localizedDescription))//message: error!.localizedDescription
                 return
             }
-            completion(.success(.succesfullRequest))
+            completion(.succesfullRequest)
         }
+    }
+
+    public func setViewModel(userVM: UserVM) {
+        self.userVM = userVM
     }
 }

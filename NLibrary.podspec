@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '12.0'
 
   s.source_files = 'NLibrary/Classes/**/*'
-  
+#  s.static_framework = true
   # s.resource_bundles = {
   #   'NLibrary' => ['NLibrary/Assets/*.png']
   # }
@@ -39,4 +39,14 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+#  s.dependency 'Firebase'
+#  s.dependency 'Firebase/Analytics'
+  s.static_framework = true
+
+  s.dependency 'Firebase'
+  s.dependency 'Firebase/Core'
+  s.dependency 'Firebase/Auth'
+  s.dependency 'Firebase/Analytics'
+  s.dependency 'Firebase/Database'
+#s.dependency 'Firebase', '~> 3.0'
 end

@@ -17,7 +17,7 @@ public protocol SignUpVCprotocol : class {
 //----------------------------------------
 
 public class UserVM {
-    var id: String?
+    var userId: String?
     var name: String?
     var email: String?
     weak var signUpVC: SignUpVCprotocol?
@@ -28,13 +28,13 @@ public class UserVM {
         self.userRepo = userRepo
         userRepo.setViewModel(userVM: self)
     }
-    
+
     public func signUp(email: String!, password: String!) {
         guard let userRepo = userRepo else {
             fatalError()
         }
         userRepo.signUp(email: email, password: password) { result in
-            switch result{
+            switch result {
             case .failedRequest(let message):
                 self.signUpVC?.unsuccessfulSignIn(message: message)
             case .succesfullRequest:

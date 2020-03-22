@@ -10,5 +10,5 @@ import Foundation
 struct UserModel {
     var name: String
     var email: String
-    var id: String
+    var userId: String
 }

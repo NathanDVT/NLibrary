@@ -14,5 +14,5 @@ struct UserModel {
 }
 
 class Game: NSObject {
-    
+
 }

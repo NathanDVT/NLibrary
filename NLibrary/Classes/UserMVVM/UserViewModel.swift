@@ -9,7 +9,7 @@
 import Foundation
 //---------------------------------------- SignUp Protocol
 
-public protocol SignUpVCprotocol: class {
+public protocol SignUpViewControllerProtocol: class {
     func successfulSignIn()
     func unsuccessfulSignIn(message: String)
 }
@@ -20,10 +20,10 @@ public class UserVM {
     var userId: String?
     var name: String?
     var email: String?
-    weak var signUpVC: SignUpVCprotocol?
+    weak var signUpVC: SignUpViewControllerProtocol?
     var userRepo: UserRepoProtocol?
 
-    public init( viewController: SignUpVCprotocol, userRepo: UserRepoProtocol) {
+    public init( viewController: SignUpViewControllerProtocol, userRepo: UserRepoProtocol) {
         self.signUpVC = viewController
         self.userRepo = userRepo
         userRepo.setViewModel(userVM: self)

@@ -12,3 +12,7 @@ struct UserModel {
     var email: String
     var userId: String
 }
+
+class Game: NSObject {
+    
+}

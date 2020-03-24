@@ -6,10 +6,9 @@
 //
 
 import Foundation
-
-public class ArtistMediaViewModel {
+public class ArtistMediaViewModel: NSObject {
     public var results: [ArtistMediaViewModelCollection]
-
+    @objc public var hii: String = ""
     public struct ArtistMediaViewModelCollection: Decodable {
         public var artistName: String
         public var collectionName: String

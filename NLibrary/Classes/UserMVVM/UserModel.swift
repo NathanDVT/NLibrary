@@ -11,6 +11,8 @@ struct UserModel {
     var name: String
     var email: String
     var userId: String
+    var playListIds: [String]
+    var MusicPlayed: []
 }
 
 class Game: NSObject {

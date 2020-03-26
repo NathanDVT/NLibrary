@@ -1,7 +1,10 @@
 
+#import "LoginViewModelProtocol.h"
+
 @protocol LoginViewControllerProtocol
+
+@property (nonatomic, strong) id <LoginViewModelProtocol> viewModelDelegate;
 @required
-@property (nonatomic, weak) id <LoginViewModelProtocol> viewModelDelegate;
     - (void)signin: (NSString* )email
                   : (NSString* )password;
     - (void)successfulSignIn;

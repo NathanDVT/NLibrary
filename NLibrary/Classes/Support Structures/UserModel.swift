@@ -13,28 +13,14 @@ protocol DictionaryConvertible {
 }
 
 struct UserModel: DictionaryConvertible {
-    
-    init() {
-    }
-    
-    init?(dict: [String : Any]) {
-//        guard let userID = dict["userID"] as? String, email = dict["email"] as? String, creationDate = dict["creationDate"] as? String else {
-//            return nil
-//        }
-        self.init()
-    }
-    
-    var uid: String = "Empty"
-    var name: String = "Empty"
-    var email: String = "Empty"
-    var playListIds: [String] = ["track", "trap"]
+
+    var uid: String = "N/A"
+    var name: String = "N/A"
+    var email: String = "N/A"
+    var playListIds: [String] = []
     var followers: [String] = []
-    var photoUrl: String = "Empty"
-    
-    func getUserDict() {
-        
-    }
-    
+    var photoUrl: String = "N/A"
+
     var dict:[String:Any] {
         return [
             "uid": uid,
@@ -42,7 +28,20 @@ struct UserModel: DictionaryConvertible {
             "email": email,
             "playListIds": playListIds as NSArray,
             "followers": followers as NSArray,
-            "photoUrl": ""
+            "photoUrl": "N/A"
         ]
+    }
+
+    init() {
+    }
+    
+    init?(dict: [String : Any]) {
+        /*
+         TODO: add functionality to receive objects from Firebase Database reference snapshots
+            guard let userID = dict["userID"] as? String, email = dict["email"] as? String, creationDate = dict["creationDate"] as? String else {
+                return nil
+            }
+         */
+        self.init()
     }
 }

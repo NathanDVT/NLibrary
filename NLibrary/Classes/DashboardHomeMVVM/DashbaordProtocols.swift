@@ -8,8 +8,8 @@
 
 protocol DashboardViewModelProtocol {
     init( userId: String, viewController: SignUpViewControllerProtocol, userRepo: SignUpRepoProtocol)
-    func playRecentSongAt(index: Int) -> Void
-    func pauseCurrentSong() -> Void
+    func playRecentSongAt(index: Int)
+    func pauseCurrentSong()
 }
 
 protocol DashboardRepoProtocol {

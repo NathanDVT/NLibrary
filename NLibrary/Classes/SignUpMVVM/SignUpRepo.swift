@@ -6,10 +6,7 @@
 //  Copyright © 2020 Nathan Ngobale. All rights reserved.
 //
 import Foundation
-//import Firebase
 import FirebaseAuth
-
-
 
 public protocol SignUpRepoProtocol: class {
     func signUpAndAddNewUser (email: String, password: String)

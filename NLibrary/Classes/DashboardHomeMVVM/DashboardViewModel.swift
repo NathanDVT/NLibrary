@@ -24,29 +24,28 @@ class DashboardViewModel: DashboardViewModelProtocol {
     required init(userId: String, viewController: SignUpViewControllerProtocol, userRepo: SignUpRepoProtocol) {
         
     }
-    
+
     func playRecentSongAt(index: Int) {
         
     }
-    
+
     func pauseCurrentSong() {
         
     }
-    
+
     func populateView() {
         
     }
-    
+
     func populateRecentSongs() {
         
     }
-    
+
     func populateUsername() {
         
     }
-    
+
     func populateNumFollowers() {
-        
+
     }
-    
 }

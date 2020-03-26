@@ -13,7 +13,7 @@ class SingleSongViewModel {
     var title: String
     var artworkUrl30: String
     var previewUrl: String
-    
+
     init(model: SingleModel) {
         self.artistName = model.artistName
         self.title = model.title

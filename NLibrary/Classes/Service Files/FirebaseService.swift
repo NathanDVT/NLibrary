@@ -28,8 +28,7 @@ class FirebaseService {
     }
     
     func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) {
-            authResult, error in
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             guard let _ = authResult?.user, error == nil else {
                 completion(.failedRequest(message: error!.localizedDescription))
                 return
@@ -37,8 +36,39 @@ class FirebaseService {
             completion(.succesfullRequest)
         }
     }
+
+    func signUpAndAddNewUser(email: String, password: String, newUser: UserModel) {
+        // Attempt to sign user into application
+        self.signUp(email: email, password: password) { [weak self] result in
+            switch result {
+            case .failedRequest(let message):
+                self?.repo?.failedSignUp(errorMessage: message)
+            case .succesfullRequest:
+                // Successful sign in, attempt to add user details to database
+                self?.addUserToDB(newUser: newUser) { [weak self] result2 in
+                    switch result2 {
+                    case .failedRequest(let message):
+                        self?.repo?.failedSignUp(errorMessage: message)
+                    case .succesfullRequest:
+                        self?.repo?.successfulSignUp()
+                    }
+                }
+            }
+        }
+    }
     
-    private func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void){
+    private func addUserToDB(newUser: UserModel, completion: @escaping(APIRequestResult) -> Void) {
+        self.ref.child("users").child(Auth.auth().currentUser!.uid).setValue(newUser.dict) {
+            (error: Error?, ref: DatabaseReference) in
+            if let _ = error {
+                completion(.failedRequest(message: "Unable to add user account, please try again"))
+            } else {
+                completion(.succesfullRequest)
+            }
+        }
+    }
+
+    private func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) {authResult, error in
         guard let _ = authResult?.user, error == nil else {
             //Failure
@@ -47,38 +77,6 @@ class FirebaseService {
         }
         //Success
         completion(.succesfullRequest)
-        }
-    }
-    
-    func signUpAndAddNewUser(email: String, password: String, newUser: UserModel) {
-        // Attempt to sign user into application
-        signUp(email: email, password: password) { [weak self] result in
-            switch result {
-                case .failedRequest(let message):
-                    self?.repo?.failedSignUp(errorMessage: message)
-                case .succesfullRequest:
-                    // Successful sign in, attempt to add user details to database
-                    self?.addUserToDB(newUser: newUser) { [weak self] result2 in
-                        switch result2 {
-                        case .failedRequest(let message):
-                            self?.repo?.failedSignUp(errorMessage: message)
-                        case .succesfullRequest:
-                            self?.repo?.successfulSignUp()
-                        }
-                }
-            }
-        }
-    }
-    
-    private func addUserToDB(newUser: UserModel, completion: @escaping(APIRequestResult) -> Void) {
-        self.ref.child("users").child(Auth.auth().currentUser!.uid).setValue(newUser.dict) {
-            (error:Error?, ref:DatabaseReference) in
-            if let error = error {
-            print("Data could not be saved: \(error).")
-            } else {
-            print("Data saved successfully!")
-                completion(.succesfullRequest)
-            }
         }
     }
 }

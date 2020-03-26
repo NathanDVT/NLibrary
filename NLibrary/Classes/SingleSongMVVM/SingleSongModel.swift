@@ -14,12 +14,3 @@ struct SingleModel {
     var artworkUrl30: String
     var previewUrl: String
 }
-
-//public var artistName: String
-//public var collectionName: String
-//public var releaseDate: String
-//public var artworkUrl30: String
-//public var collectionPrice: Double
-//public var trackTimeMillis: Int
-//public var artworkUrl60: String
-//public var previewUrl: String

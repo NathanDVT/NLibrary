@@ -18,15 +18,15 @@ public enum APIRequestResult: Error {
 class FirebaseService {
     private var ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
-    
+
     init(repo: SignUpRepoProtocol) {
         self.repo = repo
     }
-    
+
     func getUser() {
         ref = Database.database().reference()
     }
-    
+
     func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             guard authResult?.user != nil, error == nil else {

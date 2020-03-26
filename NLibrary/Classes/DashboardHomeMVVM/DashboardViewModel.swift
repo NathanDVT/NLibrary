@@ -14,7 +14,7 @@ struct RecentSong {
 }
 
 class DashboardViewModel: DashboardViewModelProtocol {
-    
+
     var userName: String = ""
     var userId: String = ""
     var recentPlayedList: [RecentSong] = []

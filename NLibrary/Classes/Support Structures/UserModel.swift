@@ -8,8 +8,8 @@
 import Foundation
 
 protocol DictionaryConvertible {
-    init?(dict:[String:Any])
-    var dict:[String:Any] { get }
+    init?(dict: [String: Any])
+    var dict: [String: Any] { get }
 }
 
 struct UserModel: DictionaryConvertible {
@@ -21,7 +21,7 @@ struct UserModel: DictionaryConvertible {
     var followers: [String] = []
     var photoUrl: String = "N/A"
 
-    var dict:[String:Any] {
+    var dict:[String: Any] {
         return [
             "uid": uid,
             "name": name,
@@ -34,12 +34,12 @@ struct UserModel: DictionaryConvertible {
 
     init() {
     }
-    
-    init?(dict: [String : Any]) {
+
+    init?(dict: [String: Any]) {
         /*
-         TODO: add functionality to receive objects from Firebase Database reference snapshots
-            guard let userID = dict["userID"] as? String, email = dict["email"] as? String, creationDate = dict["creationDate"] as? String else {
-                return nil
+         TO DO: add functionality to receive objects from Firebase Database reference
+         snapshotsguard let userID = dict["userID"] as? String, email = dict["email"]
+         as? String, creationDate = dict["creationDate"] as? String else { return nil
             }
          */
         self.init()

@@ -17,7 +17,7 @@ public protocol SignUpRepoProtocol: class {
 
 public class SignUpRepo: SignUpRepoProtocol {
     var signUpVM: SignUpViewModel?
-    
+
     public init () {}
 
     lazy var signInService: FirebaseService = {return FirebaseService(repo: self)}()

@@ -22,27 +22,27 @@ class DashboardViewModel: DashboardViewModelProtocol {
     var currentPlayingIndex: Int = 0
     
     required init(userId: String, viewController: SignUpViewControllerProtocol, userRepo: SignUpRepoProtocol) {
-        
+
     }
 
     func playRecentSongAt(index: Int) {
-        
+
     }
 
     func pauseCurrentSong() {
-        
+
     }
 
     func populateView() {
-        
+
     }
 
     func populateRecentSongs() {
-        
+
     }
 
     func populateUsername() {
-        
+
     }
 
     func populateNumFollowers() {

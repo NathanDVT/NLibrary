@@ -58,9 +58,9 @@ class FirebaseService {
     }
     
     private func addUserToDB(newUser: UserModel, completion: @escaping(APIRequestResult) -> Void) {
-        self.ref.child("users").child(Auth.auth().currentUser!.uid).setValue(newUser.dict) {
-            (error: Error?, ref: DatabaseReference) in
-            if let _ = error {
+        self.ref.child("users").child(Auth.auth().currentUser!.uid)
+            .setValue(newUser.dict) { (error: Error?, _: DatabaseReference) in
+            if error != nil {
                 completion(.failedRequest(message: "Unable to add user account, please try again"))
             } else {
                 completion(.succesfullRequest)
@@ -70,10 +70,9 @@ class FirebaseService {
 
     private func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) {authResult, error in
-        guard let _ = authResult?.user, error == nil else {
+        if error != nil {
             //Failure
             completion(.failedRequest(message: error!.localizedDescription))
-            return
         }
         //Success
         completion(.succesfullRequest)

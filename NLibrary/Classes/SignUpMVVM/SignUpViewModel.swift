@@ -32,11 +32,11 @@ public class SignUpViewModel {
     public func signUp(email: String!, password: String!) {
         signUpRepo!.signUpAndAddNewUser(email: email, password: password)
     }
-    
+
     public func successfullRequest() {
         self.signUpVC?.successfulSignIn()
     }
-    
+
     public func unsuccessfulRequest(errorMessage: String) {
         self.signUpVC?.unsuccessfulSignIn(message: errorMessage)
     }

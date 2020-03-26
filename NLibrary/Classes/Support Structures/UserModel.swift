@@ -21,7 +21,7 @@ struct UserModel: DictionaryConvertible {
     var followers: [String] = []
     var photoUrl: String = "N/A"
 
-    var dict:[String: Any] {
+    var dict: [String: Any] {
         return [
             "uid": uid,
             "name": name,

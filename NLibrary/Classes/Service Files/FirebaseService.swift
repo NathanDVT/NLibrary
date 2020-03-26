@@ -29,7 +29,7 @@ class FirebaseService {
     
     func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            guard let _ = authResult?.user, error == nil else {
+            guard authResult?.user != nil, error == nil else {
                 completion(.failedRequest(message: error!.localizedDescription))
                 return
             }
@@ -56,7 +56,7 @@ class FirebaseService {
             }
         }
     }
-    
+
     private func addUserToDB(newUser: UserModel, completion: @escaping(APIRequestResult) -> Void) {
         self.ref.child("users").child(Auth.auth().currentUser!.uid)
             .setValue(newUser.dict) { (error: Error?, _: DatabaseReference) in
@@ -69,7 +69,7 @@ class FirebaseService {
     }
 
     private func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) {authResult, error in
+        Auth.auth().createUser(withEmail: email, password: password) {_, error in
         if error != nil {
             //Failure
             completion(.failedRequest(message: error!.localizedDescription))

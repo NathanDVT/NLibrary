@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIColor.h>
 //@class ArtistM
-@class Game;
+//@class Game;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HexToUIColor : NSObject

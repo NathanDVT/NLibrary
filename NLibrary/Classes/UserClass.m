@@ -21,7 +21,7 @@
     {
         NSString *hexColorCode = @"#6C5A20ff";
         if ([hexColorCode characterAtIndex:0] == '#') {
-            int length = [hexColorCode length];
+            unsigned long length = [hexColorCode length];
             NSString *hexColor = [hexColorCode substringWithRange:NSMakeRange(1, length-1)];
             if ([hexColor length] == 8) {
                 unsigned rgbHexValue = 0;

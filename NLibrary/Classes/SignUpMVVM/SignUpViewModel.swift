@@ -16,30 +16,28 @@ public protocol SignUpViewControllerProtocol: class {
 
 //----------------------------------------
 
-public class UserVM {
+public class SignUpViewModel {
     var userId: String?
     var name: String?
     var email: String?
     weak var signUpVC: SignUpViewControllerProtocol?
-    var userRepo: UserRepoProtocol?
+    var signUpRepo: SignUpRepoProtocol?
 
-    public init( viewController: SignUpViewControllerProtocol, userRepo: UserRepoProtocol) {
+    public init( viewController: SignUpViewControllerProtocol, userRepo: SignUpRepoProtocol) {
         self.signUpVC = viewController
-        self.userRepo = userRepo
+        self.signUpRepo = userRepo
         userRepo.setViewModel(userVM: self)
     }
 
     public func signUp(email: String!, password: String!) {
-        guard let userRepo = userRepo else {
-            fatalError()
-        }
-        userRepo.signUp(email: email, password: password) { result in
-            switch result {
-            case .failedRequest(let message):
-                self.signUpVC?.unsuccessfulSignIn(message: message)
-            case .succesfullRequest:
-                self.signUpVC?.successfulSignIn()
-            }
-        }
+        signUpRepo!.signUpAndAddNewUser(email: email, password: password)
+    }
+
+    public func successfullRequest() {
+        self.signUpVC?.successfulSignIn()
+    }
+
+    public func unsuccessfulRequest(errorMessage: String) {
+        self.signUpVC?.unsuccessfulSignIn(message: errorMessage)
     }
 }

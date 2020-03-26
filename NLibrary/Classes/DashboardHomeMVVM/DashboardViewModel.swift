@@ -20,7 +20,7 @@ class DashboardViewModel: DashboardViewModelProtocol {
     var recentPlayedList: [RecentSong] = []
     var numFollowers: [String] = []
     var currentPlayingIndex: Int = 0
-    
+
     required init(userId: String, viewController: SignUpViewControllerProtocol, userRepo: SignUpRepoProtocol) {
 
     }

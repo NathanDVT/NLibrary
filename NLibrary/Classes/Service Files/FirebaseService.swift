@@ -19,11 +19,11 @@ public enum APIRequestResult: Error {
     private var ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
     private var repoSignIn: LoginRepoProtocol?
-    
+
     init(repo: SignUpRepoProtocol) {
         self.repo = repo
     }
-    
+
     @objc public init(repoSignIn: LoginRepoProtocol) {
         self.repoSignIn = repoSignIn
     }
@@ -41,7 +41,7 @@ public enum APIRequestResult: Error {
             self?.repoSignIn!.successfulSignIn()
         }
     }
-    
+
     public func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) {[weak self] authResult, error in
             guard authResult?.user != nil, error == nil else {
@@ -62,7 +62,6 @@ public enum APIRequestResult: Error {
                 // Successful sign in, attempt to add user details to database
                 var user: UserModel = UserModel()
                 user.uid = Auth.auth().currentUser!.uid
-                
                 self?.addUserToDB(newUser: user) { [weak self] result2 in
                     switch result2 {
                     case .failedRequest(let message):
@@ -93,7 +92,6 @@ public enum APIRequestResult: Error {
             completion(.failedRequest(message: error!.localizedDescription))
         }
         //Success
-            print(authResult?.user.uid)
             completion(.succesfullRequest)
         }
     }

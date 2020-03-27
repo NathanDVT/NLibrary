@@ -43,7 +43,7 @@ public enum APIRequestResult: Error {
     }
 
     public func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) {[weak self] authResult, error in
+        Auth.auth().signIn(withEmail: email, password: password) {/*[weak self]*/ authResult, error in
             guard authResult?.user != nil, error == nil else {
                 completion(.failedRequest(message: error!.localizedDescription))
                 return
@@ -86,7 +86,7 @@ public enum APIRequestResult: Error {
     }
 
     private func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) {authResult, error in
+        Auth.auth().createUser(withEmail: email, password: password) {_, error in
         if error != nil {
             //Failure
             completion(.failedRequest(message: error!.localizedDescription))

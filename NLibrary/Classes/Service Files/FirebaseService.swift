@@ -15,20 +15,35 @@ public enum APIRequestResult: Error {
     case succesfullRequest
 }
 
-class FirebaseService {
+@objc public class FirebaseService: NSObject {
     private var ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
+    private var repoSignIn: LoginRepoProtocol?
 
     init(repo: SignUpRepoProtocol) {
         self.repo = repo
     }
 
-    func getUser() {
+    @objc public init(repoSignIn: LoginRepoProtocol) {
+        self.repoSignIn = repoSignIn
+    }
+
+    @objc func getUser() {
         ref = Database.database().reference()
     }
 
-    func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+    @objc public func signIn(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) {[weak self] authResult, error in
+            guard authResult?.user != nil, error == nil else {
+                self?.repoSignIn!.unsuccessfulSign(in: error?.localizedDescription)
+                return
+            }
+            self?.repoSignIn!.successfulSignIn()
+        }
+    }
+
+    public func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) {/*[weak self]*/ authResult, error in
             guard authResult?.user != nil, error == nil else {
                 completion(.failedRequest(message: error!.localizedDescription))
                 return
@@ -37,7 +52,7 @@ class FirebaseService {
         }
     }
 
-    func signUpAndAddNewUser(email: String, password: String, newUser: UserModel) {
+    func signUpAndAddNewUser(email: String, password: String) {
         // Attempt to sign user into application
         self.signUp(email: email, password: password) { [weak self] result in
             switch result {
@@ -45,7 +60,9 @@ class FirebaseService {
                 self?.repo?.failedSignUp(errorMessage: message)
             case .succesfullRequest:
                 // Successful sign in, attempt to add user details to database
-                self?.addUserToDB(newUser: newUser) { [weak self] result2 in
+                var user: UserModel = UserModel()
+                user.uid = Auth.auth().currentUser!.uid
+                self?.addUserToDB(newUser: user) { [weak self] result2 in
                     switch result2 {
                     case .failedRequest(let message):
                         self?.repo?.failedSignUp(errorMessage: message)
@@ -75,7 +92,7 @@ class FirebaseService {
             completion(.failedRequest(message: error!.localizedDescription))
         }
         //Success
-        completion(.succesfullRequest)
+            completion(.succesfullRequest)
         }
     }
 }

@@ -5,8 +5,6 @@
 
 @property (nonatomic, strong) id <LoginViewModelProtocol> viewModelDelegate;
 @required
-    - (void)signin: (NSString* )email
-                  : (NSString* )password;
     - (void)successfulSignIn;
-    - (void)unsuccessfulSignIn;
+    - (void)unsuccessfulSignIn: (NSString* ) message;
 @end

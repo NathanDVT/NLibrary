@@ -1,17 +1,17 @@
+#ifndef LoginRepo_h
+#define LoginRepo_h
 
-#ifndef LoginRepoProtocol_h
-#define LoginRepoProtocol_h
-//@class ArtistMe
-//public protocol SignUpVCprotocol: class {
-//    func successfulSignIn()
-//    func unsuccessfulSignIn(message: String)
-//}
+#import <Foundation/Foundation.h>
 
-@protocol LoginRepoProtocol
+#import "LoginRepoProtocol.h"
+
+@interface LoginRepo : NSObject<LoginRepoProtocol>
+    - (instancetype) init;
     - (void)signIn: (NSString* )email
                   : (NSString* )password;
     - (void)successfulSignIn;
-    - (void)unsuccessfulSignIn;
+    - (void)unsuccessfulSignIn: (NSString* ) message;
+    - (void)assignViewModel: (id <LoginViewModelProtocol> ) viewModel;
 @end
 
 #endif

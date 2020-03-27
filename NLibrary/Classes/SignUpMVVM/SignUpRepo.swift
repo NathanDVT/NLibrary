@@ -35,8 +35,6 @@ public class SignUpRepo: SignUpRepoProtocol {
     }
 
     public func signUpAndAddNewUser(email: String, password: String) {
-        var user: UserModel = UserModel()
-        user.uid = Auth.auth().currentUser!.uid
-        signInService.signUpAndAddNewUser(email: email, password: password, newUser: user)
+        signInService.signUpAndAddNewUser(email: email, password: password)
     }
 }

@@ -21,12 +21,12 @@ public class SignUpViewModel {
     var name: String?
     var email: String?
     weak var signUpVC: SignUpViewControllerProtocol?
-    var signUpRepo: SignUpRepoProtocol?
+    private var signUpRepo: SignUpRepoProtocol?
 
-    public init( viewController: SignUpViewControllerProtocol, userRepo: SignUpRepoProtocol) {
+    public init( viewController: SignUpViewControllerProtocol, signUpRepo: SignUpRepoProtocol) {
         self.signUpVC = viewController
-        self.signUpRepo = userRepo
-        userRepo.setViewModel(userVM: self)
+        self.signUpRepo = signUpRepo
+        signUpRepo.setViewModel(userVM: self)
     }
 
     public func signUp(email: String!, password: String!) {

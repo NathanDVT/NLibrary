@@ -8,32 +8,47 @@
 
 import Foundation
 
-public class SearchSongRepo: SearchSongRepoProtocol {
-    
-    let resourceURL: URL
+public protocol SearchSongRepoProtocol: class {
+    func getArtistMedia (artistName: String) throws
+    func successfulRequest(jsonData: Data?)
+    func setViewModel(viewModel: SearchSongsViewModelProtocol)
+}
 
-    public init(artistName: String) throws {
-        let resourceString = "https://itunes.apple.com/search?term=\(artistName)"
-        guard let resourceURL = URL(string: resourceString)
-            else { throw ArtistMediaError.invalidName}
-        self.resourceURL = resourceURL
+public enum ArtistMediaError: Error {
+    case noDataAvailable
+    case canNotProcessData
+    case invalidName
+}
+
+public class SearchSongRepo: SearchSongRepoProtocol {
+    var viewModel: SearchSongsViewModelProtocol?
+    lazy var nlibraryService: NLibrarySerivce = {
+        return NLibrarySerivce(repo: self)
+    }()
+    
+    public init() {
+    }
+//    self    NLibrary.SearchSongRepo    0x0000600001030ed0
+    public func setViewModel(viewModel: SearchSongsViewModelProtocol) {
+        self.viewModel = viewModel
+    }
+    
+    public func successfulRequest(jsonData: Data?) {
+        let decoder = JSONDecoder()
+        guard let jsonData = jsonData else { return }
+        do {
+            let artistMediaResponse = try decoder.decode(ArtistMediaResponse.self, from: jsonData)
+            self.viewModel!.successfulRequest(songs: artistMediaResponse.results)
+        } catch {
+
+        }
     }
 
-    public func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: self.resourceURL) { data, _, _ in
-            guard let jsonData = data else {
-                completion(.failure(.noDataAvailable))
-                return
-            }
-            do {
-                let decoder = JSONDecoder()
-                let artistMediaResponse = try decoder.decode(ArtistMediaResponse.self, from: jsonData)
-                let collections = artistMediaResponse.results
-                completion(.success(collections))
-            } catch {
-                completion(.failure(.canNotProcessData))
-            }
+    public func getArtistMedia (artistName: String) throws {
+        do {
+            try self.nlibraryService.getSongs(artistName: artistName)
+        } catch {
+            self.viewModel?.unsuccessfulRequest(errorMessage: "Unable to process artist name, please ensure no special characters are used")
         }
-        dataTask.resume()
     }
 }

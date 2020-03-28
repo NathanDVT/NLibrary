@@ -49,7 +49,8 @@ public class SearchSongRepo: SearchSongRepoProtocol {
         do {
             try self.nlibraryService.getSongs(artistName: artistName)
         } catch {
-            self.viewModel!.unsuccessfulRequest(errorMessage: "Unable to process artist name, please ensure no special characters are used")
+            self.viewModel!.unsuccessfulRequest(errorMessage:
+                "Unable to process artist name, please ensure no special characters are used")
         }
     }
 }

@@ -18,7 +18,6 @@ import Foundation
                 guard let resourceURL = URL(string: resourceString)
                     else { throw ArtistMediaError.invalidName }
                 self.resourceURL = resourceURL
-        
                 let dataTask = URLSession.shared.dataTask(with: self.resourceURL!) { [weak self] data, _, _ in
                     self?.repo?.successfulRequest(jsonData: data)
                 }

@@ -26,7 +26,6 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
 
     public func getCollections(artistName: String) {
         do {
-            
             try repo?.getArtistMedia(artistName: artistName) 
         } catch {}
     }

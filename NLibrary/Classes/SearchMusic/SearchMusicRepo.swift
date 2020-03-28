@@ -25,14 +25,15 @@ public class SearchSongRepo: SearchSongRepoProtocol {
     lazy var nlibraryService: NLibrarySerivce = {
         return NLibrarySerivce(repo: self)
     }()
-    
+
     public init() {
+
     }
-//    self    NLibrary.SearchSongRepo    0x0000600001030ed0
+
     public func setViewModel(viewModel: SearchSongsViewModelProtocol) {
         self.viewModel = viewModel
     }
-    
+
     public func successfulRequest(jsonData: Data?) {
         let decoder = JSONDecoder()
         guard let jsonData = jsonData else { return }
@@ -48,7 +49,7 @@ public class SearchSongRepo: SearchSongRepoProtocol {
         do {
             try self.nlibraryService.getSongs(artistName: artistName)
         } catch {
-            self.viewModel?.unsuccessfulRequest(errorMessage: "Unable to process artist name, please ensure no special characters are used")
+            self.viewModel!.unsuccessfulRequest(errorMessage: "Unable to process artist name, please ensure no special characters are used")
         }
     }
 }

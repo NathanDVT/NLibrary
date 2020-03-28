@@ -26,15 +26,23 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
 
     public func getCollections(artistName: String) {
         do {
-            let artistMediaRequest = SearchSongRepo()
-            try artistMediaRequest.getArtistMedia(artistName: artistName) 
+            
+            try repo?.getArtistMedia(artistName: artistName) 
         } catch {}
     }
-    
+
     public func successfulRequest(songs: [SearchSongModel]) {
+        self.convertToViewModel(songs: songs)
         self.viewController?.successfulRequest()
     }
-    
+
+    private func convertToViewModel(songs: [SearchSongModel]) {
+        results.removeAll()
+        for song in songs {
+            results.append(SearchSongDetail(collection: song))
+        }
+    }
+
     public func getSongs() -> [SearchSongDetail] {
         return results
     }

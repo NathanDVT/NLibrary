@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public class ArtistMediaViewModel: NSObject {
+public class SearchSongsViewModel: NSObject {
     public var results: [ArtistMediaViewModelCollection]
     @objc public var hii: String = ""
     public struct ArtistMediaViewModelCollection: Decodable {
@@ -37,16 +37,14 @@ public class ArtistMediaViewModel: NSObject {
 
     public var listOfArtistCollections = [Collection]()
     public var artistName: String
-//    public var repo: ArtistMediaRepoProtocol
     public init (artistName: String) {//, repo: ArtistMediaRepoProtocol) {
         self.artistName = artistName
         self.results = []
-//        self.repo = repo
     }
 
     public func getCollections(completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
         do {
-            let artistMediaRequest = try ArtistMediaRepo(artistName: self.artistName)
+            let artistMediaRequest = try SearchSongRepo(artistName: self.artistName)
             artistMediaRequest.getArtistMedia { /*[weak self]*/ result in
                 switch result {
                 case .failure(let error):

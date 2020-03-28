@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ArtistMediaRepoMock: ArtistMediaRepoProtocol {
+public class ArtistMediaRepoMock: SearchSongRepoProtocol {
     public init(artistName: String) throws {
 
     }

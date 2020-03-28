@@ -12,7 +12,7 @@ public protocol ArtistMediaResponseProtocol: class {
     var results: [Collection] {get set}
 }
 
-public protocol ArtistMediaRepoProtocol: class {
+public protocol SearchSongRepoProtocol: class {
     //init(artistName: String)
     func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void)
 }
@@ -55,31 +55,31 @@ public enum ArtistMediaError: Error {
 
 //////////////////////// Repository
 
-public class ArtistMediaRepo: ArtistMediaRepoProtocol {
-    let resourceURL: URL
-
-    public init(artistName: String) throws {
-        let resourceString = "https://itunes.apple.com/search?term=\(artistName)"
-        guard let resourceURL = URL(string: resourceString)
-            else { throw ArtistMediaError.invalidName}
-        self.resourceURL = resourceURL
-    }
-
-    public func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
-        let dataTask = URLSession.shared.dataTask(with: self.resourceURL) { data, _, _ in
-            guard let jsonData = data else {
-                completion(.failure(.noDataAvailable))
-                return
-            }
-            do {
-                let decoder = JSONDecoder()
-                let artistMediaResponse = try decoder.decode(ArtistMediaResponse.self, from: jsonData)
-                let collections = artistMediaResponse.results
-                completion(.success(collections))
-            } catch {
-                completion(.failure(.canNotProcessData))
-            }
-        }
-        dataTask.resume()
-    }
-}
+//public class ArtistMediaRepo: ArtistMediaRepoProtocol {
+//    let resourceURL: URL
+//
+//    public init(artistName: String) throws {
+//        let resourceString = "https://itunes.apple.com/search?term=\(artistName)"
+//        guard let resourceURL = URL(string: resourceString)
+//            else { throw ArtistMediaError.invalidName}
+//        self.resourceURL = resourceURL
+//    }
+//
+//    public func getArtistMedia (completion: @escaping(Result<[Collection], ArtistMediaError>) -> Void) {
+//        let dataTask = URLSession.shared.dataTask(with: self.resourceURL) { data, _, _ in
+//            guard let jsonData = data else {
+//                completion(.failure(.noDataAvailable))
+//                return
+//            }
+//            do {
+//                let decoder = JSONDecoder()
+//                let artistMediaResponse = try decoder.decode(ArtistMediaResponse.self, from: jsonData)
+//                let collections = artistMediaResponse.results
+//                completion(.success(collections))
+//            } catch {
+//                completion(.failure(.canNotProcessData))
+//            }
+//        }
+//        dataTask.resume()
+//    }
+//}

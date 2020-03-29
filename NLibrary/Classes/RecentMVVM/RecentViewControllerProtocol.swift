@@ -8,8 +8,6 @@
 
 import Foundation
 
-struct RecentSong {
-    var artistName: String = "N/A"
-    var titleName: String = "N/A"
-    var previewUrl: String = "N/A"
+public protocol RecentViewControllerProtocol: class {
+
 }

@@ -19,9 +19,14 @@ public enum APIRequestResult: Error {
     private var ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
     private var repoSignIn: LoginRepoProtocol?
+    private var repoSearch: SearchSongRepoProtocol?
 
     init(repo: SignUpRepoProtocol) {
         self.repo = repo
+    }
+    
+    init(repo: SearchSongRepoProtocol) {
+        self.repoSearch = repo
     }
 
     @objc public init(repoSignIn: LoginRepoProtocol) {
@@ -62,6 +67,7 @@ public enum APIRequestResult: Error {
                 // Successful sign in, attempt to add user details to database
                 var user: UserModel = UserModel()
                 user.uid = Auth.auth().currentUser!.uid
+                user.email = email
                 self?.addUserToDB(newUser: user) { [weak self] result2 in
                     switch result2 {
                     case .failedRequest(let message):
@@ -90,9 +96,83 @@ public enum APIRequestResult: Error {
         if error != nil {
             //Failure
             completion(.failedRequest(message: error!.localizedDescription))
-        }
-        //Success
+        } else {
+            //Success
             completion(.succesfullRequest)
+            }
         }
+    }
+    
+    public func addSongToRecent(songDTO: RecentSongModel) {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        self.removeSongFromRecent(playlistName: "Recent", song: songDTO) { result in
+            switch result {
+            default:
+                self.ref.child("Playlists")
+                     .child(currentUser.uid)
+                     .child("Recent")
+                     .childByAutoId()
+                     .updateChildValues(songDTO.dict) { [weak self](error: Error?, _: DatabaseReference) in
+                     if error != nil {
+                     } else {
+                         self?.createPlaylist(playlistName: "Recent")
+                     }
+                 }
+            }
+        }
+    }
+
+    public func createPlaylist(playlistName: String) {
+        checkIfPlaylistExists(playlistName: playlistName) { result in
+            switch result {
+            case .failedRequest( _):
+                break;
+            case .succesfullRequest:
+                guard let currentUser = Auth.auth().currentUser else {
+                    return
+                }
+                self.ref.child("users").child(currentUser.uid)
+                .child("Playlists").childByAutoId().updateChildValues(["playlistId": playlistName])
+            }
+        }
+    }
+    
+    private func checkIfPlaylistExists(playlistName: String, completion: @escaping(APIRequestResult) -> Void) {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        let myref = self.ref.child("users").child(currentUser.uid).child("Playlists")
+            .queryOrdered(byChild: "playlistId").queryEqual(toValue: playlistName)
+        myref.observe(.value, with: { (snapshot) in
+            if snapshot.hasChildren() {
+                completion(.failedRequest(message: "Already exits"))
+            } else {
+                completion(.succesfullRequest)
+            }
+        })
+    }
+    
+    private func removeSongFromRecent(playlistName: String, song: RecentSongModel, completion: @escaping(APIRequestResult) -> Void) {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        let myref = self.ref.child("Playlists").child(currentUser.uid).child(playlistName)
+            .queryOrdered(byChild: "previewUrl").queryEqual(toValue: song.previewUrl)
+        myref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+            if snapshot.hasChildren() {
+                for songToRemove in snapshot.children {
+                    let snapShotToDelete = songToRemove as! DataSnapshot
+                    self?.ref.child("Playlists/\(currentUser.uid)/\(playlistName)/\(snapShotToDelete.key)").removeValue() {(error: Error?, _: DatabaseReference) in
+                        
+                        completion(.succesfullRequest)
+                    }
+                }
+            } else {
+                completion(.succesfullRequest)
+//                print("No children")
+            }
+        })
     }
 }

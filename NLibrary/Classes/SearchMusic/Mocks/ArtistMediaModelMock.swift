@@ -9,6 +9,10 @@
 import Foundation
 
 public class ArtistMediaRepoMock: SearchSongRepoProtocol {
+    public func addSongToRecent(songDTO: RecentSongModel) {
+        
+    }
+
     public func successfulRequest(jsonData: Data?) {
 
     }

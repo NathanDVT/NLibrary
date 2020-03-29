@@ -7,11 +7,11 @@
 //
 
 import Foundation
-struct RecentSong {
-    var artistName: String
-    var title: String
-    var previewUrl: String
-}
+//struct RecentSong {
+//    var artistName: String
+//    var title: String
+//    var previewUrl: String
+//}
 
 class DashboardViewModel: DashboardViewModelProtocol {
 

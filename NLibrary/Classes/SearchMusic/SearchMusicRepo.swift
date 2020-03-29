@@ -12,6 +12,7 @@ public protocol SearchSongRepoProtocol: class {
     func getArtistMedia (artistName: String) throws
     func successfulRequest(jsonData: Data?)
     func setViewModel(viewModel: SearchSongsViewModelProtocol)
+    func addSongToRecent(songDTO: RecentSongModel)
 }
 
 public enum ArtistMediaError: Error {
@@ -25,9 +26,14 @@ public class SearchSongRepo: SearchSongRepoProtocol {
     lazy var nlibraryService: NLibrarySerivce = {
         return NLibrarySerivce(repo: self)
     }()
+    lazy var firebaseService: FirebaseService = {return FirebaseService(repo: self)}()
 
     public init() {
 
+    }
+
+    public func addSongToRecent(songDTO: RecentSongModel) {
+        firebaseService.addSongToRecent(songDTO: songDTO)
     }
 
     public func setViewModel(viewModel: SearchSongsViewModelProtocol) {

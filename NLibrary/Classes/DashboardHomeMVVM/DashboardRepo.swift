@@ -12,31 +12,37 @@ public class DashboardRepo: DashboardRepoProtocol {
     lazy var firebaseService: FirebaseService = {return FirebaseService(repo: self)}()
     var viewModel: DashboardViewModelProtocol?
     public required init () {
-        
+
     }
     public func getUserModel() {
-        
+
     }
     public func getRecent() {
-        
+
     }
     public func getFollowers() {
-        
+
     }
-    public func setViewModel(viewModel: DashboardViewModelProtocol){
+    public func setViewModel(viewModel: DashboardViewModelProtocol) {
         self.viewModel = viewModel
     }
     public func getDashboardContent() {
         self.firebaseService.getDashboardItems()
     }
     public func successFulNameRequest(dictionary: NSDictionary) {
-        let user: DashBoardUserInfoModel = DashBoardUserInfoModel(name: dictionary["name"] as! String)
+        guard let name = dictionary["name"] as? String else {
+            return
+        }
+        let user: DashBoardUserInfoModel = DashBoardUserInfoModel(name: name)
         viewModel!.successFulNameReceived(userDashboardModel: user)
     }
     public func successFulRecentPlaylistRequest(dictionary: NSDictionary) {
         var recentSongModels: [RecentSongModel] = []
         for (_, value) in dictionary {
-            recentSongModels.append(RecentSongModel(dictionary: value as! NSDictionary))
+            guard let page = value as? NSDictionary else {
+                return
+            }
+            recentSongModels.append(RecentSongModel(dictionary: page))
         }
         viewModel?.successFulRecentSongsReceived(songsModel: recentSongModels)
     }

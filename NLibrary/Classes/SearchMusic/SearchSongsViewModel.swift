@@ -45,7 +45,7 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
     public func getSongs() -> [SearchSongDetail] {
         return results
     }
-    
+
     public func addToRecentSongs(songIndex: Int) {
         var recentSong: RecentSongModel = RecentSongModel()
         let selectedSong: SearchSongDetail = results[songIndex]

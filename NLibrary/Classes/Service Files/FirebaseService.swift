@@ -128,8 +128,8 @@ public enum APIRequestResult: Error {
     public func createPlaylist(playlistName: String) {
         checkIfPlaylistExists(playlistName: playlistName) { result in
             switch result {
-            case .failedRequest( _):
-                break;
+            case .failedRequest:
+                break
             case .succesfullRequest:
                 guard let currentUser = Auth.auth().currentUser else {
                     return
@@ -155,7 +155,9 @@ public enum APIRequestResult: Error {
         })
     }
     
-    private func removeSongFromRecent(playlistName: String, song: RecentSongModel, completion: @escaping(APIRequestResult) -> Void) {
+    private func removeSongFromRecent(playlistName: String,
+                                      song: RecentSongModel,
+                                      completion: @escaping(APIRequestResult) -> Void) {
         guard let currentUser = Auth.auth().currentUser else {
             return
         }
@@ -164,8 +166,11 @@ public enum APIRequestResult: Error {
         myref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
             if snapshot.hasChildren() {
                 for songToRemove in snapshot.children {
-                    let snapShotToDelete = songToRemove as! DataSnapshot
-        self?.ref.child("Playlists/\(currentUser.uid)/\(playlistName)/\(snapShotToDelete.key)").removeValue() {(error: Error?, _: DatabaseReference) in
+                    guard let snapShotToDelete = songToRemove as? DataSnapshot else {
+                        return
+                    }
+        self?.ref.child("Playlists/\(currentUser.uid)/\(playlistName)/\(snapShotToDelete.key)")
+            .removeValue() {(_: Error?, _: DatabaseReference) in
                         completion(.succesfullRequest)
                     }
                 }
@@ -208,6 +213,4 @@ public enum APIRequestResult: Error {
             self?.repoDashBoard!.successFulRecentPlaylistRequest(dictionary: value!)
         })
     }
-    
-//    public func 
 }

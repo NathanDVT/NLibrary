@@ -28,12 +28,12 @@ public class RecentViewModel: RecentViewModelProtocol {
         repo.setViewModel(viewModel: self)
     }
     public func addToRecentSongs(userId: String) {
-        
+
     }
     public func successfulRequest(songs: [SearchSongModel]) {
-        
+
     }
     public func unsuccessfulRequest(errorMessage: String) {
-        
+
     }
 }

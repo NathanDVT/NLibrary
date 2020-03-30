@@ -8,13 +8,6 @@
 import Foundation
 import FirebaseAuth
 
-public protocol SignUpRepoProtocol: class {
-    func signUpAndAddNewUser (email: String, password: String)
-    func setViewModel(userVM: SignUpViewModel)
-    func failedSignUp(errorMessage: String)
-    func successfulSignUp()
-}
-
 public class SignUpRepo: SignUpRepoProtocol {
     var signUpVM: SignUpViewModel?
 

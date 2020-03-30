@@ -12,7 +12,7 @@ protocol DictionaryConvertible {
     var dict: [String: Any] { get }
 }
 
-struct UserModel: DictionaryConvertible {
+public struct UserModel: DictionaryConvertible {
 
     var uid: String = "N/A"
     var name: String = "N/A"

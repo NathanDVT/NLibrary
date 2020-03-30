@@ -28,23 +28,19 @@ public protocol FirebaseServiceProtocol: NSObject {
     func signIn(email: String, password: String)
 
     func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void)
+    
+    func signUpAndAddNewUser(email: String, password: String)
 
     func addUserToDB(newUser: UserModel, completion: @escaping(APIRequestResult) -> Void)
-
 
     func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void)
     func addSongToRecent(songDTO: RecentSongModel)
 
-
     func createPlaylist(playlistName: String)
-
 
     func getDashboardItems()
 
-
     func getUserNameToDashboard()
 
-
     func getRecentSongsToDashboard()
-
 }

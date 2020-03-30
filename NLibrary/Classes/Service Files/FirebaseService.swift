@@ -15,26 +15,26 @@ public enum APIRequestResult: Error {
     case succesfullRequest
 }
 
-@objc public class FirebaseService: NSObject {
+@objc public class FirebaseService: NSObject, FirebaseServiceProtocol {
     private let ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
     private var repoSignIn: LoginRepoProtocol?
     private var repoSearch: SearchSongRepoProtocol?
     private var repoDashBoard: DashboardRepoProtocol?
 
-    init(repo: SignUpRepoProtocol) {
+    public required init(repo: SignUpRepoProtocol) {
         self.repo = repo
     }
 
-    init(repo: SearchSongRepoProtocol) {
+    public required init(repo: SearchSongRepoProtocol) {
         self.repoSearch = repo
     }
 
-    init(repo: DashboardRepoProtocol) {
+    required public init(repo: DashboardRepoProtocol) {
         self.repoDashBoard = repo
     }
 
-    @objc public init(repoSignIn: LoginRepoProtocol) {
+    @objc required public init(repoSignIn: LoginRepoProtocol) {
         self.repoSignIn = repoSignIn
     }
 
@@ -58,7 +58,7 @@ public enum APIRequestResult: Error {
         }
     }
 
-    func signUpAndAddNewUser(email: String, password: String) {
+    public func signUpAndAddNewUser(email: String, password: String) {
         // Attempt to sign user into application
         self.signUp(email: email, password: password) { [weak self] result in
             switch result {
@@ -81,7 +81,7 @@ public enum APIRequestResult: Error {
         }
     }
 
-    private func addUserToDB(newUser: UserModel, completion: @escaping(APIRequestResult) -> Void) {
+    public func addUserToDB(newUser: UserModel, completion: @escaping(APIRequestResult) -> Void) {
         self.ref.child("users").child(Auth.auth().currentUser!.uid)
             .setValue(newUser.dict) { (error: Error?, _: DatabaseReference) in
             if error != nil {
@@ -92,7 +92,7 @@ public enum APIRequestResult: Error {
         }
     }
 
-    private func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
+    public func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) {_, error in
         if error != nil {
             //Failure
@@ -185,7 +185,7 @@ public enum APIRequestResult: Error {
         getRecentSongsToDashboard()
     }
 
-    private func getUserNameToDashboard() {
+    public func getUserNameToDashboard() {
         guard let currentUser = Auth.auth().currentUser else {
             return
         }
@@ -199,7 +199,7 @@ public enum APIRequestResult: Error {
         })
     }
 
-    private func getRecentSongsToDashboard() {
+    public func getRecentSongsToDashboard() {
         guard let currentUser = Auth.auth().currentUser else {
             return
         }

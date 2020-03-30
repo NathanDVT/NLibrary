@@ -8,30 +8,29 @@
 import Foundation
 import FirebaseAuth
 
-public class SignUpRepo: SignUpRepoProtocol {
-    var signUpVM: SignUpViewModelProtocol?
-
+public class SignUpMockRepo: SignUpRepoProtocol {
+    public var signUpVM: SignUpViewModelProtocol?
+    public var email: String = ""
+    public var password: String = ""
     public init () {}
 
     lazy var signInService: FirebaseServiceProtocol = {return FirebaseService(repo: self)}()
 
     public func setViewModel(userVM: SignUpViewModelProtocol) {
-        self.signUpVM = userVM
     }
 
     public func failedSignUp(errorMessage: String) {
-        signUpVM?.unsuccessfulRequest(errorMessage: errorMessage)
+
     }
 
     public func successfulSignUp() {
-        signUpVM?.successfullRequest()
     }
 
     public func signUpAndAddNewUser(email: String, password: String) {
-        signInService.signUpAndAddNewUser(email: email, password: password)
+        self.email = email
+        self.password = password
     }
     
     public func setServiceProvider(service: FirebaseServiceProtocol) {
-        signInService = service
     }
 }

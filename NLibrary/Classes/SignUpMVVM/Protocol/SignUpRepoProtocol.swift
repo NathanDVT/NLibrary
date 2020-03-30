@@ -10,7 +10,8 @@ import Foundation
 
 public protocol SignUpRepoProtocol: class {
     func signUpAndAddNewUser (email: String, password: String)
-    func setViewModel(userVM: SignUpViewModel)
+    func setViewModel(userVM: SignUpViewModelProtocol)
     func failedSignUp(errorMessage: String)
     func successfulSignUp()
+    func setServiceProvider(service: FirebaseServiceProtocol)
 }

@@ -25,7 +25,7 @@ public enum APIRequestResult: Error {
     init(repo: SignUpRepoProtocol) {
         self.repo = repo
     }
-    
+
     init(repo: SearchSongRepoProtocol) {
         self.repoSearch = repo
     }
@@ -103,7 +103,7 @@ public enum APIRequestResult: Error {
             }
         }
     }
-    
+
     public func addSongToRecent(songDTO: RecentSongModel) {
         guard let currentUser = Auth.auth().currentUser else {
             return
@@ -139,7 +139,7 @@ public enum APIRequestResult: Error {
             }
         }
     }
-    
+
     private func checkIfPlaylistExists(playlistName: String, completion: @escaping(APIRequestResult) -> Void) {
         guard let currentUser = Auth.auth().currentUser else {
             return
@@ -154,7 +154,7 @@ public enum APIRequestResult: Error {
             }
         })
     }
-    
+
     private func removeSongFromRecent(playlistName: String,
                                       song: RecentSongModel,
                                       completion: @escaping(APIRequestResult) -> Void) {
@@ -170,7 +170,7 @@ public enum APIRequestResult: Error {
                         return
                     }
         self?.ref.child("Playlists/\(currentUser.uid)/\(playlistName)/\(snapShotToDelete.key)")
-            .removeValue() {(_: Error?, _: DatabaseReference) in
+            .removeValue {(_: Error?, _: DatabaseReference) in
                         completion(.succesfullRequest)
                     }
                 }
@@ -179,12 +179,12 @@ public enum APIRequestResult: Error {
             }
         })
     }
-    
+
     public func getDashboardItems() {
         getUserNameToDashboard()
         getRecentSongsToDashboard()
     }
-    
+
     private func getUserNameToDashboard() {
         guard let currentUser = Auth.auth().currentUser else {
             return
@@ -198,7 +198,7 @@ public enum APIRequestResult: Error {
             self?.repoDashBoard!.successFulNameRequest(dictionary: value!)
         })
     }
-    
+
     private func getRecentSongsToDashboard() {
         guard let currentUser = Auth.auth().currentUser else {
             return

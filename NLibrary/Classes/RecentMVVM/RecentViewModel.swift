@@ -20,7 +20,6 @@ public class RecentViewModel: RecentViewModelProtocol {
     private var repo: RecentRepoProtocol?
     private var currentSong: RecentSongModel?
     weak var viewController: RecentViewControllerProtocol?
-    
     required public init (view: RecentViewControllerProtocol, repo: RecentRepoProtocol) {
 //        self.songs = []
         self.repo = repo

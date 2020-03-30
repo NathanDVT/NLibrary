@@ -12,7 +12,6 @@ public struct RecentSong {
     public var artistName: String = "N/A"
     public var titleName: String = "N/A"
     public var previewUrl: String = "N/A"
-    
     init (model: RecentSongModel) {
         self.artistName = model.artistName
         self.titleName = model.titleName

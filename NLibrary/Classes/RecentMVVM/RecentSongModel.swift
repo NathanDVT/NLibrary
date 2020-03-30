@@ -13,7 +13,6 @@ public struct RecentSongModel: DictionaryConvertible {
     var artistName: String = "N/A"
     var titleName: String = "N/A"
     var previewUrl: String = "N/A"
-    
     var dict: [String: Any] {
         return [
             "artistName": artistName,

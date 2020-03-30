@@ -29,7 +29,7 @@ public class RecentRepo: RecentRepoProtocol {
     }
 
     public func successfulRequest(jsonData: Data?) {
-        
+
     }
 
     public func unsuccessfulSongRequests() {

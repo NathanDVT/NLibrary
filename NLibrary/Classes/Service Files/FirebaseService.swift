@@ -16,10 +16,11 @@ public enum APIRequestResult: Error {
 }
 
 @objc public class FirebaseService: NSObject {
-    private var ref: DatabaseReference! = Database.database().reference()
+    private let ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
     private var repoSignIn: LoginRepoProtocol?
     private var repoSearch: SearchSongRepoProtocol?
+    private var repoDashBoard: DashboardRepoProtocol?
 
     init(repo: SignUpRepoProtocol) {
         self.repo = repo
@@ -29,12 +30,12 @@ public enum APIRequestResult: Error {
         self.repoSearch = repo
     }
 
-    @objc public init(repoSignIn: LoginRepoProtocol) {
-        self.repoSignIn = repoSignIn
+    init(repo: DashboardRepoProtocol) {
+        self.repoDashBoard = repo
     }
 
-    @objc func getUser() {
-        ref = Database.database().reference()
+    @objc public init(repoSignIn: LoginRepoProtocol) {
+        self.repoSignIn = repoSignIn
     }
 
     @objc public func signIn(email: String, password: String) {
@@ -164,15 +165,49 @@ public enum APIRequestResult: Error {
             if snapshot.hasChildren() {
                 for songToRemove in snapshot.children {
                     let snapShotToDelete = songToRemove as! DataSnapshot
-                    self?.ref.child("Playlists/\(currentUser.uid)/\(playlistName)/\(snapShotToDelete.key)").removeValue() {(error: Error?, _: DatabaseReference) in
-                        
+        self?.ref.child("Playlists/\(currentUser.uid)/\(playlistName)/\(snapShotToDelete.key)").removeValue() {(error: Error?, _: DatabaseReference) in
                         completion(.succesfullRequest)
                     }
                 }
             } else {
                 completion(.succesfullRequest)
-//                print("No children")
             }
         })
     }
+    
+    public func getDashboardItems() {
+        getUserNameToDashboard()
+        getRecentSongsToDashboard()
+    }
+    
+    private func getUserNameToDashboard() {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        self.ref.child("users/\(currentUser.uid)").observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            guard value != nil else {
+                // TO DO: name could not be loaded
+                return
+            }
+            self?.repoDashBoard!.successFulNameRequest(dictionary: value!)
+        })
+    }
+    
+    private func getRecentSongsToDashboard() {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        self.ref.child("Playlists/\(currentUser.uid)/Recent")
+            .queryOrderedByKey().queryLimited(toLast: 3).observe(.value, with: { [weak self] (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            guard value != nil else {
+                // TO DO: playlist could not be loaded
+                return
+            }
+            self?.repoDashBoard!.successFulRecentPlaylistRequest(dictionary: value!)
+        })
+    }
+    
+//    public func 
 }

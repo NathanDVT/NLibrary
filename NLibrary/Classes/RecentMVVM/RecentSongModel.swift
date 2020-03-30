@@ -34,4 +34,17 @@ public struct RecentSongModel: DictionaryConvertible {
          */
         self.init()
     }
+    
+    init(dictionary: NSDictionary) {
+        /*
+         TO DO: add functionality to receive objects from Firebase Database reference
+         snapshotsguard let userID = dict["userID"] as? String, email = dict["email"]
+         as? String, creationDate = dict["creationDate"] as? String else { return nil
+            }
+         */
+        artistName = dictionary.value(forKey: "artistName") as! String
+        titleName = dictionary.value(forKey: "titleName") as! String
+        previewUrl = dictionary.value(forKey: "previewUrl") as! String
+//        self.init()
+    }
 }

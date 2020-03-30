@@ -8,8 +8,14 @@
 
 import Foundation
 
-struct RecentSong {
-    var artistName: String = "N/A"
-    var titleName: String = "N/A"
-    var previewUrl: String = "N/A"
+public struct RecentSong {
+    public var artistName: String = "N/A"
+    public var titleName: String = "N/A"
+    public var previewUrl: String = "N/A"
+    
+    init (model: RecentSongModel) {
+        self.artistName = model.artistName
+        self.titleName = model.titleName
+        self.previewUrl = model.previewUrl
+    }
 }

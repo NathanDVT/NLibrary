@@ -28,6 +28,7 @@ public struct SearchSongModel: Decodable {
     public var trackTimeMillis: Int
     public var artworkUrl60: String
     public var previewUrl: String
+    public var trackName: String
 
     public init( ) {
         artistName = ""
@@ -36,6 +37,7 @@ public struct SearchSongModel: Decodable {
         artworkUrl30 = ""
         artworkUrl60 = ""
         previewUrl = ""
+        trackName = ""
         trackTimeMillis = 0
         collectionPrice = 0
     }

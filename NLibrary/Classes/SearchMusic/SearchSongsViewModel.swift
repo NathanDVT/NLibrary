@@ -45,30 +45,33 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
     public func getSongs() -> [SearchSongDetail] {
         return results
     }
+
+    public func addToRecentSongs(songIndex: Int) {
+        var recentSong: RecentSongModel = RecentSongModel()
+        let selectedSong: SearchSongDetail = results[songIndex]
+        recentSong.artistName = selectedSong.artistName
+        recentSong.previewUrl = selectedSong.previewUrl
+        recentSong.titleName = selectedSong.titleName
+        repo?.addSongToRecent(songDTO: recentSong)
+    }
 }
 
 public struct SearchSongDetail: Decodable {
     public var artistName: String
     public var collectionName: String
-    public var releaseDate: String
-    public var artworkUrl30: String
-    public var collectionPrice: Double
     public var trackTimeHours: Int
     public var trackTimeMinutes: Int
     public var artworkUrl60: String
     public var previewUrl: String
+    public var titleName: String
 
     public init( collection: SearchSongModel ) {
         self.artistName = collection.artistName
-        self.collectionPrice = collection.collectionPrice
-        self.releaseDate = collection.releaseDate
-        self.artworkUrl30 = collection.artworkUrl30
         self.collectionName = collection.collectionName
         self.trackTimeHours = collection.trackTimeMillis / (60*60)
         self.trackTimeMinutes = collection.trackTimeMillis - (60) / collection.trackTimeMillis
         self.artworkUrl60 = collection.artworkUrl60
         self.previewUrl = collection.previewUrl
-        self.collectionPrice = collection.collectionPrice
-        self.releaseDate = collection.releaseDate
+        self.titleName = collection.trackName
         }
 }

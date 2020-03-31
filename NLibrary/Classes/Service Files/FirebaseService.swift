@@ -16,7 +16,6 @@ public enum APIRequestResult: Error {
 }
 
 @objc public class FirebaseService: NSObject, FirebaseServiceProtocol {
-    
     private let ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
     private var repoSignIn: LoginRepoProtocol?
@@ -130,7 +129,7 @@ public enum APIRequestResult: Error {
             }
         }
     }
-    
+
     public func addSongToPlaylist(playlistName: String, songDTO: RecentSongModel) {
         guard let currentUser = Auth.auth().currentUser else {
             return
@@ -279,6 +278,5 @@ public enum APIRequestResult: Error {
         } catch {
             
         }
-        
     }
 }

@@ -10,13 +10,13 @@ import Foundation
 
 public class DashboardMockRepo: DashboardRepoProtocol {
     public func logoutRequest() {
-        
+
     }
-    
+
     public func successfulLogOut() {
-        
+
     }
-    
+
     lazy var firebaseService: FirebaseServiceProtocol = {return FirebaseService(repo: self)}()
     var viewModel: DashboardViewModelProtocol?
     public required init () {
@@ -32,6 +32,6 @@ public class DashboardMockRepo: DashboardRepoProtocol {
     }
 
     public func setServiceProvider(service: FirebaseServiceProtocol) {
-        
+
     }
 }

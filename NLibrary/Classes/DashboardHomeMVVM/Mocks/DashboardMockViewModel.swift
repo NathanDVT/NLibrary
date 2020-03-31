@@ -16,7 +16,7 @@ public class DashboardMockViewModel: DashboardViewModelProtocol {
     }
 
     public func successfulLogOut() {
-        
+
     }
 
     public var userName: String = ""

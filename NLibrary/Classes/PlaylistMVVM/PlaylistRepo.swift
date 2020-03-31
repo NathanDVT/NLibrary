@@ -30,12 +30,16 @@ public class PlaylistRepo {
 
     public func successfulGetUserPlaylists(dictionary: NSDictionary) {
         var recentSongModels: [PlaylistDetailModel] = []
-        for (key, value) in dictionary.allValues.first as! [String: Any] {
-            recentSongModels.append(PlaylistDetailModel(name: key, numSongs: (value as! [String: Any]).count))
+        guard let keyValues = dictionary.allValues.first as? [String: Any] else {
+            return
+        }
+        for (key, value) in keyValues {
+            guard let songsDictionary = value as? [String: Any] else { return }
+            recentSongModels.append(PlaylistDetailModel(name: key, numSongs: songsDictionary.count))
         }
         viewModel?.successfulRequest(songs: recentSongModels)
     }
-    
+
     public func createPlaylist(playlistName: String) {
         firebaseService.createPlaylist(playlistName: playlistName)
     }

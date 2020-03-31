@@ -15,7 +15,7 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
         recentSong.titleName = selectedSong.titleName
         repo?.addSongToPlaylist(playlistName: playlistName, songDTO: recentSong)
     }
-    
+
     public func getUserPlaylistNames() {
         self.repo?.getUserPlaylistNames()
     }
@@ -25,7 +25,7 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
     }
 
     public func addSongToPlaylist() {
-        
+
     }
 
     private var results: [SearchSongDetail]

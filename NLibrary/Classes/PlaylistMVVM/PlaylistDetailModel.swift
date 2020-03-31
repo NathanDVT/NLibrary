@@ -21,7 +21,7 @@ public struct PlaylistDetailModel: DictionaryConvertible {
 
     init() {
     }
-    
+
     init(name: String, numSongs: Int) {
         self.name = name
         self.numSongs = numSongs

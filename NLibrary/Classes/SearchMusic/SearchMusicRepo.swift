@@ -38,7 +38,7 @@ public class SearchSongRepo: SearchSongRepoProtocol {
     public func addSongToRecent(songDTO: RecentSongModel) {
         firebaseService.addSongToRecent(songDTO: songDTO)
     }
-    
+
     public func getUserPlaylistNames() {
         firebaseService.getUserPlaylistsNames()
     }
@@ -66,7 +66,7 @@ public class SearchSongRepo: SearchSongRepoProtocol {
                 "Unable to process artist name, please ensure no special characters are used")
         }
     }
-    
+
     public func successfulUserPlaylistNames(dictionary: NSDictionary) {
         var names: [String] = []
         for (_, value) in dictionary {

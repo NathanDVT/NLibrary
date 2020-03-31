@@ -42,7 +42,7 @@ public class PlaylistViewModel {
     public func getSongs() -> [SearchSongDetail] {
         return results
     }
-    
+
     public func createPlaylist(playlistName: String) {
         repo?.createPlaylist(playlistName: playlistName)
     }

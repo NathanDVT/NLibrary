@@ -10,20 +10,20 @@ import Foundation
 
 public class FirebaseServiceMock: NSObject, FirebaseServiceProtocol {
     public func getUserPlaylistDetails() {
-        
+
     }
-    
+
     public func getUserPlaylistsNames() {
-        
+
     }
-    
+
     public func getUserPlaylists() {
     }
-    
+
     public func logout() {
-        
+
     }
-    
+
     public func signUpAndAddNewUser(email: String, password: String) {
         self.email = email
         self.password = password
@@ -32,13 +32,13 @@ public class FirebaseServiceMock: NSObject, FirebaseServiceProtocol {
     public var email: String = ""
     public var password: String = ""
     public var calledGetDashboardItems: Bool = false
-    
+
     required public init(repo: SignUpRepoProtocol) {
-        
+
     }
 
     required public init(repo: SearchSongRepoProtocol){
-        
+
     }
 
     required public init(repo: DashboardRepoProtocol) {

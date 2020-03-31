@@ -11,9 +11,6 @@ import Foundation
 //----------------------------------------
 
 public class SignUpViewModel: SignUpViewModelProtocol {
-//    var userId: String?
-//    var name: String?
-//    var email: String?
     weak var signUpVC: SignUpViewControllerProtocol?
     private var signUpRepo: SignUpRepoProtocol?
 

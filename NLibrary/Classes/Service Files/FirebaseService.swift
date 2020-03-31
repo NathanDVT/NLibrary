@@ -262,10 +262,6 @@ public enum APIRequestResult: Error {
         self.ref.child("Playlists/\(currentUser.uid)")
             .observe(.value, with: { [weak self] (snapshot) in
                 let value = [snapshot.key: snapshot.value!] as NSDictionary
-            guard value != nil else {
-                // TO DO: playlist could not be loaded
-                return
-            }
             self?.repoPlaylist!.successfulGetUserPlaylists(dictionary: value)
         })
     }

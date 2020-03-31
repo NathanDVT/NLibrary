@@ -30,7 +30,7 @@ public class SignUpMockRepo: SignUpRepoProtocol {
         self.email = email
         self.password = password
     }
-    
+
     public func setServiceProvider(service: FirebaseServiceProtocol) {
     }
 }

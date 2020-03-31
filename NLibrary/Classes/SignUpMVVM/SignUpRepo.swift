@@ -30,7 +30,7 @@ public class SignUpRepo: SignUpRepoProtocol {
     public func signUpAndAddNewUser(email: String, password: String) {
         signInService.signUpAndAddNewUser(email: email, password: password)
     }
-    
+
     public func setServiceProvider(service: FirebaseServiceProtocol) {
         signInService = service
     }

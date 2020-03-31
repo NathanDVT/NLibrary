@@ -23,7 +23,7 @@ public class PlaylistRepo {
     public func setViewModel(viewModel: PlaylistViewModel) {
         self.viewModel = viewModel
     }
-    
+
     public func getUserPlaylistDetails() {
         firebaseService.getUserPlaylistDetails()
     }
@@ -44,4 +44,3 @@ public class PlaylistRepo {
         firebaseService.createPlaylist(playlistName: playlistName)
     }
 }
-

@@ -32,6 +32,5 @@ public class DashboardMockRepo: DashboardRepoProtocol {
     }
 
     public func setServiceProvider(service: FirebaseServiceProtocol) {
-
     }
 }

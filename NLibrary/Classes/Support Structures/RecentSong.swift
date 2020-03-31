@@ -17,4 +17,6 @@ public struct RecentSong {
         self.titleName = model.titleName
         self.previewUrl = model.previewUrl
     }
+    init () {
+    }
 }

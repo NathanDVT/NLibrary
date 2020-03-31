@@ -43,4 +43,8 @@ public protocol FirebaseServiceProtocol: NSObject {
     func getUserNameToDashboard()
 
     func getRecentSongsToDashboard()
+
+    func logout()
+    func getUserPlaylistsNames()
+    func getUserPlaylistDetails()
 }

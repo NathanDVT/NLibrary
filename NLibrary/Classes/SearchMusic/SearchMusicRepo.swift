@@ -13,6 +13,9 @@ public protocol SearchSongRepoProtocol: class {
     func successfulRequest(jsonData: Data?)
     func setViewModel(viewModel: SearchSongsViewModelProtocol)
     func addSongToRecent(songDTO: RecentSongModel)
+    func successfulUserPlaylistNames(dictionary: NSDictionary)
+    func getUserPlaylistNames()
+    func addSongToPlaylist(playlistName: String, songDTO: RecentSongModel)
 }
 
 public enum ArtistMediaError: Error {
@@ -34,6 +37,10 @@ public class SearchSongRepo: SearchSongRepoProtocol {
 
     public func addSongToRecent(songDTO: RecentSongModel) {
         firebaseService.addSongToRecent(songDTO: songDTO)
+    }
+    
+    public func getUserPlaylistNames() {
+        firebaseService.getUserPlaylistsNames()
     }
 
     public func setViewModel(viewModel: SearchSongsViewModelProtocol) {
@@ -58,5 +65,23 @@ public class SearchSongRepo: SearchSongRepoProtocol {
             self.viewModel!.unsuccessfulRequest(errorMessage:
                 "Unable to process artist name, please ensure no special characters are used")
         }
+    }
+    
+    public func successfulUserPlaylistNames(dictionary: NSDictionary) {
+        var names: [String] = []
+        for (_, value) in dictionary {
+            guard let page = value as? [String: String] else {
+                return
+            }
+            guard let playlistName: String = page["playlistId"] else {
+                return
+            }
+            names.append(playlistName)
+        }
+        viewModel?.successfulUserPlaylistNames(playlistNames: names)
+    }
+
+    public func addSongToPlaylist(playlistName: String, songDTO: RecentSongModel) {
+        firebaseService.addSongToPlaylist(playlistName: playlistName, songDTO: songDTO)
     }
 }

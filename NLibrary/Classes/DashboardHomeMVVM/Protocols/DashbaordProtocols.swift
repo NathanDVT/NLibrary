@@ -13,4 +13,6 @@ public protocol DashboardViewModelProtocol: class {
     func loadContent()
     func successFulNameReceived(userDashboardModel: DashBoardUserInfoModel)
     func successFulRecentSongsReceived(songsModel: [RecentSongModel])
+    func logoutRequest()
+    func successfulLogOut()
 }

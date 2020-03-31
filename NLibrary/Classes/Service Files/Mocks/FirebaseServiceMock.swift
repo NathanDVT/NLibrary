@@ -9,13 +9,29 @@
 import Foundation
 
 public class FirebaseServiceMock: NSObject, FirebaseServiceProtocol {
+    public func getUserPlaylistDetails() {
+        
+    }
+    
+    public func getUserPlaylistsNames() {
+        
+    }
+    
+    public func getUserPlaylists() {
+    }
+    
+    public func logout() {
+        
+    }
+    
     public func signUpAndAddNewUser(email: String, password: String) {
         self.email = email
         self.password = password
     }
-    
+    var dashboardRepo: DashboardRepoProtocol?
     public var email: String = ""
     public var password: String = ""
+    public var calledGetDashboardItems: Bool = false
     
     required public init(repo: SignUpRepoProtocol) {
         
@@ -58,7 +74,7 @@ public class FirebaseServiceMock: NSObject, FirebaseServiceProtocol {
     }
 
     public func getDashboardItems() {
-        
+        calledGetDashboardItems = true
     }
 
     public func getUserNameToDashboard() {

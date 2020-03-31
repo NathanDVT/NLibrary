@@ -16,14 +16,20 @@ public enum APIRequestResult: Error {
 }
 
 @objc public class FirebaseService: NSObject, FirebaseServiceProtocol {
+    
     private let ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
     private var repoSignIn: LoginRepoProtocol?
     private var repoSearch: SearchSongRepoProtocol?
     private var repoDashBoard: DashboardRepoProtocol?
+    private var repoPlaylist: PlaylistRepo?
 
     public required init(repo: SignUpRepoProtocol) {
         self.repo = repo
+    }
+
+    public required init(repo: PlaylistRepo) {
+        self.repoPlaylist = repo
     }
 
     public required init(repo: SearchSongRepoProtocol) {
@@ -124,6 +130,42 @@ public enum APIRequestResult: Error {
             }
         }
     }
+    
+    public func addSongToPlaylist(playlistName: String, songDTO: RecentSongModel) {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        self.removeSongFromRecent(playlistName: playlistName, song: songDTO) { result in
+            switch result {
+            default:
+                self.ref.child("Playlists")
+                     .child(currentUser.uid)
+                     .child(playlistName)
+                     .childByAutoId()
+                     .updateChildValues(songDTO.dict) { [weak self](error: Error?, _: DatabaseReference) in
+                     if error != nil {
+                     } else {
+                         self?.createPlaylist(playlistName: playlistName)
+                     }
+                 }
+            }
+        }
+    }
+
+    public func getUserPlaylistsNames() {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        self.ref.child("users/\(currentUser.uid)/Playlists")
+            .queryOrderedByKey().observe(.value, with: { [weak self] (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            guard value != nil else {
+                // TO DO: playlist could not be loaded
+                return
+            }
+            self?.repoSearch!.successfulUserPlaylistNames(dictionary: value!)
+        })
+    }
 
     public func createPlaylist(playlistName: String) {
         checkIfPlaylistExists(playlistName: playlistName) { result in
@@ -212,5 +254,31 @@ public enum APIRequestResult: Error {
             }
             self?.repoDashBoard!.successFulRecentPlaylistRequest(dictionary: value!)
         })
+    }
+
+    public func getUserPlaylistDetails() {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        self.ref.child("Playlists/\(currentUser.uid)")
+            .observe(.value, with: { [weak self] (snapshot) in
+                let value = [snapshot.key: snapshot.value!] as NSDictionary
+            guard value != nil else {
+                // TO DO: playlist could not be loaded
+                return
+            }
+            self?.repoPlaylist!.successfulGetUserPlaylists(dictionary: value)
+        })
+    }
+
+    public func logout() {
+        do {
+            // TO DO: cancel observers hanging
+            try Auth.auth().signOut()
+            self.repoDashBoard!.successfulLogOut()
+        } catch {
+            
+        }
+        
     }
 }

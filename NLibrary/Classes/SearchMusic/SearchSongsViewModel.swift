@@ -7,8 +7,29 @@
 
 import Foundation
 public class SearchSongsViewModel: SearchSongsViewModelProtocol {
+    public func addSongToPlaylist(playlistName: String, songIndex: Int) {
+        var recentSong: RecentSongModel = RecentSongModel()
+        let selectedSong: SearchSongDetail = results[songIndex]
+        recentSong.artistName = selectedSong.artistName
+        recentSong.previewUrl = selectedSong.previewUrl
+        recentSong.titleName = selectedSong.titleName
+        repo?.addSongToPlaylist(playlistName: playlistName, songDTO: recentSong)
+    }
+    
+    public func getUserPlaylistNames() {
+        self.repo?.getUserPlaylistNames()
+    }
+
+    public func successfulUserPlaylistNames(playlistNames: [String]) {
+        viewController?.successFulRecentSongsReceived(playlistNames: playlistNames)
+    }
+
+    public func addSongToPlaylist() {
+        
+    }
 
     private var results: [SearchSongDetail]
+    private var playlistNames: [String] = []
     private var repo: SearchSongRepoProtocol?
     weak var viewController: SeearchMusicTableViewControllerProtocol?
 
@@ -18,6 +39,10 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
         self.repo = repo
         self.viewController = view
         repo.setViewModel(viewModel: self)
+    }
+
+    public func successFulRecentSongsReceived(playlistNames: [String]) {
+        viewController?.successFulRecentSongsReceived(playlistNames: playlistNames)
     }
 
     public func unsuccessfulRequest(errorMessage: String) {
@@ -31,15 +56,11 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
     }
 
     public func successfulRequest(songs: [SearchSongModel]) {
-        self.convertToViewModel(songs: songs)
-        self.viewController?.successfulRequest()
-    }
-
-    private func convertToViewModel(songs: [SearchSongModel]) {
         results.removeAll()
         for song in songs {
             results.append(SearchSongDetail(collection: song))
         }
+        self.viewController?.successfulRequest()
     }
 
     public func getSongs() -> [SearchSongDetail] {

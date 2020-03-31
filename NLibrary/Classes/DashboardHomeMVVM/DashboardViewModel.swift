@@ -17,10 +17,18 @@ import AVKit
 
 @available(iOS 13.0, *)
 public class DashboardViewModel: DashboardViewModelProtocol {
+    public func logoutRequest() {
+        repo?.logoutRequest()
+    }
+
+    public func successfulLogOut() {
+        viewController?.successfulLogout()
+    }
+
     var userName: String = ""
     var recentPlayedList: [RecentSong] = []
     var numFollowers: [String] = []
-    var currentPlayingIndex: Int = -1
+    public var currentPlayingIndex: Int = -1
     private var repo: DashboardRepoProtocol?
     weak var viewController: DashboardViewControllerProtocol?
     lazy var musicPlayer: AVPlayer = {return AVPlayer()}()
@@ -71,22 +79,6 @@ public class DashboardViewModel: DashboardViewModelProtocol {
             viewController?.setCurrentControlIcon(img: img)
             musicPlayer.play()
         }
-    }
-
-    func populateView() {
-
-    }
-
-    func populateRecentSongs() {
-
-    }
-
-    func populateUsername() {
-
-    }
-
-    func populateNumFollowers() {
-
     }
 
     public func successFulNameReceived(userDashboardModel: DashBoardUserInfoModel) {

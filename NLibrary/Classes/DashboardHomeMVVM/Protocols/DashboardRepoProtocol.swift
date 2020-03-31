@@ -10,11 +10,12 @@ import Foundation
 
 public protocol DashboardRepoProtocol: class {
     init ()
-    func getUserModel()
-    func getRecent()
-    func getFollowers()
+//    func getFollowers()
     func setViewModel(viewModel: DashboardViewModelProtocol)
     func getDashboardContent()
     func successFulNameRequest(dictionary: NSDictionary)
     func successFulRecentPlaylistRequest(dictionary: NSDictionary)
+    func setServiceProvider(service: FirebaseServiceProtocol)
+    func logoutRequest()
+    func successfulLogOut()
 }

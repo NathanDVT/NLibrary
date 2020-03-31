@@ -37,16 +37,16 @@ public class FirebaseServiceMock: NSObject, FirebaseServiceProtocol {
 
     }
 
-    required public init(repo: SearchSongRepoProtocol){
+    required public init(repo: SearchSongRepoProtocol) {
 
     }
 
     required public init(repo: DashboardRepoProtocol) {
-        
+
     }
 
     required public init(repoSignIn: LoginRepoProtocol) {
-        
+
     }
 
     public func signIn(email: String, password: String) {
@@ -55,22 +55,22 @@ public class FirebaseServiceMock: NSObject, FirebaseServiceProtocol {
     }
 
     public func signIn(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
-        
+
     }
 
     public func addUserToDB(newUser: UserModel, completion: @escaping(APIRequestResult) -> Void) {
-        
+
     }
 
     public func signUp(email: String, password: String, completion: @escaping(APIRequestResult) -> Void) {
-        
+
     }
     public func addSongToRecent(songDTO: RecentSongModel) {
-        
+
     }
 
     public func createPlaylist(playlistName: String) {
-        
+
     }
 
     public func getDashboardItems() {
@@ -78,10 +78,10 @@ public class FirebaseServiceMock: NSObject, FirebaseServiceProtocol {
     }
 
     public func getUserNameToDashboard() {
-        
+
     }
 
     public func getRecentSongsToDashboard() {
-        
+
     }
 }

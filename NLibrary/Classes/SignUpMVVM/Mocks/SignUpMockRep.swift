@@ -14,7 +14,7 @@ public class SignUpMockRepo: SignUpRepoProtocol {
     public var password: String = ""
     public init () {}
 
-    lazy var signInService: FirebaseServiceProtocol = {return FirebaseService(repo: self)}()
+    lazy var signInService: FirebaseServiceProtocol = { return FirebaseService(repo: self)}()
 
     public func setViewModel(userVM: SignUpViewModelProtocol) {
     }

@@ -272,7 +272,6 @@ public enum APIRequestResult: Error {
             try Auth.auth().signOut()
             self.repoDashBoard!.successfulLogOut()
         } catch {
-            
         }
     }
 }

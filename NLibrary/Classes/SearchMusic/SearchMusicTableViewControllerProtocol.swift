@@ -9,4 +9,5 @@
 public protocol SeearchMusicTableViewControllerProtocol: class {
     func successfulRequest()
     func unsuccessfulRequest(errorMessage: String)
+    func successFulRecentSongsReceived(playlistNames: [String])
 }

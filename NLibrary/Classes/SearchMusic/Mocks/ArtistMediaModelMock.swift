@@ -9,6 +9,22 @@
 import Foundation
 
 public class ArtistMediaRepoMock: SearchSongRepoProtocol {
+    public func addSongToPlaylist(playlistName: String, songDTO: RecentSongModel) {
+
+    }
+
+    public func successfulUserPlaylistNames(dictionary: NSDictionary) {
+
+    }
+
+    public func getUserPlaylistNames() {
+
+    }
+
+    public func successfulUserPlaylist(dictionary: NSDictionary) {
+
+    }
+
     public func addSongToRecent(songDTO: RecentSongModel) {
 
     }

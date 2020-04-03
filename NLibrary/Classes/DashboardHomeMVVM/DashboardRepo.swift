@@ -9,18 +9,9 @@
 import Foundation
 
 public class DashboardRepo: DashboardRepoProtocol {
-    lazy var firebaseService: FirebaseService = {return FirebaseService(repo: self)}()
+    lazy var firebaseService: FirebaseServiceProtocol = {return FirebaseService(repo: self)}()
     var viewModel: DashboardViewModelProtocol?
     public required init () {
-
-    }
-    public func getUserModel() {
-
-    }
-    public func getRecent() {
-
-    }
-    public func getFollowers() {
 
     }
     public func setViewModel(viewModel: DashboardViewModelProtocol) {
@@ -45,5 +36,14 @@ public class DashboardRepo: DashboardRepoProtocol {
             recentSongModels.append(RecentSongModel(dictionary: page))
         }
         viewModel?.successFulRecentSongsReceived(songsModel: recentSongModels)
+    }
+    public func setServiceProvider(service: FirebaseServiceProtocol) {
+        self.firebaseService = service
+    }
+    public func logoutRequest() {
+        self.firebaseService.logout()
+    }
+    public func successfulLogOut() {
+        self.viewModel?.successfulLogOut()
     }
 }

@@ -7,10 +7,8 @@
 //
 
 import Foundation
+import AVKit
 
-struct SingleModel {
-    var artistName: String
-    var title: String
-    var artworkUrl30: String
-    var previewUrl: String
+public protocol PlaylistViewControllerProtocol: class {
+    func successfulRequest(songs: [PlaylistDetailModel])
 }

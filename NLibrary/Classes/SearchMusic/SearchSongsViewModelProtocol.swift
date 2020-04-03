@@ -14,4 +14,8 @@ public protocol SearchSongsViewModelProtocol: class {
     func successfulRequest(songs: [SearchSongModel])
     func unsuccessfulRequest(errorMessage: String)
     func getSongs() -> [SearchSongDetail]
+    func successfulUserPlaylistNames(playlistNames: [String])
+    func getUserPlaylistNames()
+    func addSongToPlaylist(playlistName: String, songIndex: Int)
+    func addToRecentSongs(songIndex: Int)
 }

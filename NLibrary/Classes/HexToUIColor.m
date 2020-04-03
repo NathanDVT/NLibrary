@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UserClass.h"
+#import "HexToUIColor.h"
 #import <UIKit/UIColor.h>
 #import <NLibrary/NLibrary-Swift.h>
 @implementation HexToUIColor

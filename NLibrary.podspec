@@ -48,5 +48,6 @@ TODO: Add long description of the pod here.
   s.dependency 'Firebase/Auth'
   s.dependency 'Firebase/Analytics'
   s.dependency 'Firebase/Database'
+  s.dependency 'Firebase/Performance'
 #s.dependency 'Firebase', '~> 3.0'
 end

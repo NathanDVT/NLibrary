@@ -9,6 +9,14 @@
 import Foundation
 
 public class DashboardMockRepo: DashboardRepoProtocol {
+    public func postTrending(trendingArtists: TrendingArtistModel, completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+    }
+    
+    public func getTrending(completion: @escaping (Result<[TrendingArtistModel], Error>) -> Void) {
+        
+    }
+
     public func logoutRequest() {
 
     }

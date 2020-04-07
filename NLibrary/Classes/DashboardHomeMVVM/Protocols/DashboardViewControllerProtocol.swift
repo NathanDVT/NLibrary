@@ -14,4 +14,5 @@ public protocol DashboardViewControllerProtocol: class {
     func setSongTitle(title: String)
     func setCurrentControlIcon(img: UIImage)
     func successfulLogout()
+    func successfulTrendingArtists(trendingArtists: [TrendingArtistModel])
 }

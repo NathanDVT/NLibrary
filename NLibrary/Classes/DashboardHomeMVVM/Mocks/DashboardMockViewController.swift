@@ -11,6 +11,10 @@ import AVKit
 
 @available(iOS 13.0, *)
 public class DashboardMockViewController: DashboardViewControllerProtocol {
+    public func successfulTrendingArtists(trendingArtists: [TrendingArtistModel]) {
+        
+    }
+    
     public func successfulLogout() {
 
     }

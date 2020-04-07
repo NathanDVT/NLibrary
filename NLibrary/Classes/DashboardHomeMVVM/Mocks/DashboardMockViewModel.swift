@@ -11,6 +11,13 @@ import AVKit
 
 @available(iOS 13.0, *)
 public class DashboardMockViewModel: DashboardViewModelProtocol {
+    public func postTrendingSong(index: Int) {
+
+    }
+    
+    public func getTrending() {
+    }
+    
     public func logoutRequest() {
         repo?.logoutRequest()
     }

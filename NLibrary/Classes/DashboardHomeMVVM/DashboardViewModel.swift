@@ -1,22 +1,23 @@
-//
-//  UserProtocol.swift
-//  taylorswift
-//
-//  Created by Nathan Ngobale on 2020/03/20.
-//  Copyright © 2020 Nathan Ngobale. All rights reserved.
-//
 
 import Foundation
 import AVKit
 
-//struct RecentSong {
-//    var artistName: String
-//    var title: String
-//    var previewUrl: String
-//}
-
 @available(iOS 13.0, *)
 public class DashboardViewModel: DashboardViewModelProtocol {
+    public func postTrendingSong(index: Int) {
+        guard index < self.trendingArtists.count else {
+            return
+        }
+        self.repo?.postTrending(trendingArtists: self.trendingArtists[index]) { [weak self] result in
+            switch result {
+            case .success( _):
+                self?.getTrending()
+            default:
+                break;
+            }
+        }
+    }
+
     public func logoutRequest() {
         repo?.logoutRequest()
     }
@@ -28,6 +29,7 @@ public class DashboardViewModel: DashboardViewModelProtocol {
     var userName: String = ""
     var recentPlayedList: [RecentSong] = []
     var numFollowers: [String] = []
+    var trendingArtists: [TrendingArtistModel] = []
     public var currentPlayingIndex: Int = -1
     private var repo: DashboardRepoProtocol?
     weak var viewController: DashboardViewControllerProtocol?
@@ -92,5 +94,17 @@ public class DashboardViewModel: DashboardViewModelProtocol {
             recentPlayedList.append(RecentSong(model: model))
         }
         self.viewController?.successFulSongRequests(songs: recentPlayedList)
+    }
+
+    public func getTrending() {
+        self.repo?.getTrending() { [weak self] result in
+            switch result {
+            case .success(let trendingArtists):
+                self?.trendingArtists = trendingArtists
+                self?.viewController?.successfulTrendingArtists(trendingArtists: trendingArtists)
+            default:
+                break;
+            }
+        }
     }
 }

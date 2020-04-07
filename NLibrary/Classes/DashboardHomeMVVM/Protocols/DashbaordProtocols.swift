@@ -15,4 +15,6 @@ public protocol DashboardViewModelProtocol: class {
     func successFulRecentSongsReceived(songsModel: [RecentSongModel])
     func logoutRequest()
     func successfulLogOut()
+    func getTrending()
+    func postTrendingSong(index: Int)
 }

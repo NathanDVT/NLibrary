@@ -114,6 +114,7 @@
 		2B02E31EDBE1B1D32B887C5380750752 /* NLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				4165D30A242B3C9200132D0A /* SingleMVVM1 */,
 				416DE195240CF5A90078D54F /* ViewModel */,
 				416DE194240CF5690078D54F /* View */,
 				416DE18F240CE70C0078D54F /* Model */,
@@ -123,6 +124,13 @@
 			);
 			name = NLibrary;
 			path = ../..;
+			sourceTree = "<group>";
+		};
+		4165D30A242B3C9200132D0A /* SingleMVVM1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SingleMVVM1;
 			sourceTree = "<group>";
 		};
 		416DE18F240CE70C0078D54F /* Model */ = {

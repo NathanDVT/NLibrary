@@ -8,10 +8,6 @@
 
 import Foundation
 
-public struct DashBoardUserInfoModel {
-    var name: String
-}
-
 public struct RecentListModel {
     var songs: [RecentSongModel]
 }

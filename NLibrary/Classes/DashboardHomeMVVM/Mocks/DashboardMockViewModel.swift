@@ -53,10 +53,6 @@ public class DashboardMockViewModel: DashboardViewModelProtocol {
 
     }
 
-    public func successFulNameReceived(userDashboardModel: DashBoardUserInfoModel) {
-        self.userName = userDashboardModel.name
-    }
-
     public func successFulRecentSongsReceived(songsModel: [RecentSongModel]) {
         testRecentSongModels = songsModel
     }

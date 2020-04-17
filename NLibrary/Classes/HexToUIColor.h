@@ -15,8 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HexToUIColor : NSObject
 -(UIColor *) getUIColorObjectFor;//: (NSString*) hexColorCode;
 -(instancetype) init;//:(NSString *)hexColorCode;
+-(instancetype) initWithhexcode:(NSString *)hexColorCode;
 @property UIColor *color;
-@property NSString* name;
+@property NSString* hexcode;
 @end
 
 NS_ASSUME_NONNULL_END

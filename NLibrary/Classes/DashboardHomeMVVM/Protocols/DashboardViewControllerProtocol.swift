@@ -9,7 +9,6 @@
 import Foundation
 
 public protocol DashboardViewControllerProtocol: class {
-    func successFulNameRequest(name: String)
     func successFulSongRequests(songs: [RecentSong])
     func setSongTitle(title: String)
     func setCurrentControlIcon(img: UIImage)

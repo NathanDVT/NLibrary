@@ -21,13 +21,11 @@ public class DashboardRepo: DashboardRepoProtocol {
     public func getDashboardContent() {
         self.firebaseService.getDashboardItems()
     }
-    public func successFulNameRequest(dictionary: NSDictionary) {
-        guard let name = dictionary["name"] as? String else {
-            return
-        }
-        let user: DashBoardUserInfoModel = DashBoardUserInfoModel(name: name)
-        viewModel!.successFulNameReceived(userDashboardModel: user)
-    }
+//    public func successFulNameRequest(dictionary: NSDictionary) {
+//        guard let name = dictionary["name"] as? String else {
+//            return
+//        }
+//    }
     public func successFulRecentPlaylistRequest(dictionary: NSDictionary) {
         var recentSongModels: [RecentSongModel] = []
         for (_, value) in dictionary {

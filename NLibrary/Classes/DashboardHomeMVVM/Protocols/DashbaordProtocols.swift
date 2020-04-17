@@ -11,7 +11,7 @@ public protocol DashboardViewModelProtocol: class {
     func playRecentSongAt(index: Int)
     func pauseOrPlayCurrentSong()
     func loadContent()
-    func successFulNameReceived(userDashboardModel: DashBoardUserInfoModel)
+//TO DO: Refactor to profile board    func successFulNameReceived(userDashboardModel: DashBoardUserInfoModel)
     func successFulRecentSongsReceived(songsModel: [RecentSongModel])
     func logoutRequest()
     func successfulLogOut()

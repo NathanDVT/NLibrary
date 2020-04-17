@@ -13,13 +13,19 @@
 @implementation HexToUIColor
 -(instancetype) init {
     self = [super init];
-    self.name = @"Hey";
+    self.hexcode = @"#939393ff";
+    self.color = [self getUIColorObjectFor];
+    return self;
+}
+- (instancetype) initWithhexcode:(NSString *)hexColorCode {
+    self = [super init];
+    self.hexcode = hexColorCode;
     self.color = [self getUIColorObjectFor];
     return self;
 }
 -(UIColor *)getUIColorObjectFor/*: (NSString*)hexColorCode*/ {
     {
-        NSString *hexColorCode = @"#6C5A20ff";
+        NSString *hexColorCode = self.hexcode;
         if ([hexColorCode characterAtIndex:0] == '#') {
             unsigned long length = [hexColorCode length];
             NSString *hexColor = [hexColorCode substringWithRange:NSMakeRange(1, length-1)];

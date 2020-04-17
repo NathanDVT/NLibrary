@@ -93,7 +93,7 @@ public class DashboardViewModel: DashboardViewModelProtocol {
     }
 
     public func getTrending() {
-        self.repo?.getTrending() { [weak self] result in
+        self.repo?.getTrending { [weak self] result in
             switch result {
             case .success(let trendingArtists):
                 self?.trendingArtists = trendingArtists

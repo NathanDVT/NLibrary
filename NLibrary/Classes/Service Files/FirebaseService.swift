@@ -236,7 +236,7 @@ public enum APIRequestResult: Error {
                 // TO DO: name could not be loaded
                 return
             }
-            self?.repoDashBoard!.successFulNameRequest(dictionary: value!)
+//TO DO: Refactor to profile            self?.repoDashBoard!.successFulNameRequest(dictionary: value!)
         })
     }
 

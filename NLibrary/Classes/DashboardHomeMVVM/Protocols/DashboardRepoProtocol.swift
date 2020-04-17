@@ -10,10 +10,9 @@ import Foundation
 
 public protocol DashboardRepoProtocol: class {
     init ()
-//    func getFollowers()
     func setViewModel(viewModel: DashboardViewModelProtocol)
     func getDashboardContent()
-    func successFulNameRequest(dictionary: NSDictionary)
+//TO DO: Refactor to profile screen    func successFulNameRequest(dictionary: NSDictionary)
     func successFulRecentPlaylistRequest(dictionary: NSDictionary)
     func setServiceProvider(service: FirebaseServiceProtocol)
     func logoutRequest()

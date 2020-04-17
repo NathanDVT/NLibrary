@@ -20,7 +20,7 @@ public struct TrendingArtistModel: Codable {
 
     public var artistName: String = ""
     public var tally: Int = 0
-
+    public var picurl: String = ""
     init(name: String, tally: Int) {
         self.artistName = name
         self.tally = tally

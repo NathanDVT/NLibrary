@@ -4,7 +4,7 @@ import AVKit
 
 @available(iOS 13.0, *)
 public class DashboardViewModel: DashboardViewModelProtocol {
-    
+
     public func postTrendingSong(index: Int) {
         guard index < self.trendingArtists.count else {
             return
@@ -84,11 +84,6 @@ public class DashboardViewModel: DashboardViewModelProtocol {
         }
     }
 
-//    public func successFulNameReceived(userDashboardModel: DashBoardUserInfoModel) {
-//        self.userName = userDashboardModel.name
-//        self.viewController?.successFulNameRequest(name: self.userName)
-//    }
-
     public func successFulRecentSongsReceived(songsModel: [RecentSongModel]) {
         recentPlayedList.removeAll()
         for model in songsModel {
@@ -98,7 +93,7 @@ public class DashboardViewModel: DashboardViewModelProtocol {
     }
 
     public func getTrending() {
-        let x = self.repo?.getTrending() { [weak self] result in
+        self.repo?.getTrending() { [weak self] result in
             switch result {
             case .success(let trendingArtists):
                 self?.trendingArtists = trendingArtists

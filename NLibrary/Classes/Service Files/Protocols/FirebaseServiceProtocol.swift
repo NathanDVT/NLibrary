@@ -17,6 +17,7 @@ import FirebaseAuth
 
 public protocol FirebaseServiceProtocol: NSObject {
 
+    init()
     init(repo: SignUpRepoProtocol)
 
     init(repo: SearchSongRepoProtocol)
@@ -43,7 +44,7 @@ public protocol FirebaseServiceProtocol: NSObject {
     func getUserNameToDashboard()
 
     func getRecentSongsToDashboard()
-
+//    func getUserProfile(completion: @escaping(Result<NSDictionary, APIRequestResult>) -> Void)
     func logout()
     func getUserPlaylistsNames()
     func getUserPlaylistDetails()

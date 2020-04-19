@@ -4,7 +4,6 @@ import AVKit
 
 @available(iOS 13.0, *)
 public class DashboardViewModel: DashboardViewModelProtocol {
-
     public func postTrendingSong(index: Int) {
         guard index < self.trendingArtists.count else {
             return

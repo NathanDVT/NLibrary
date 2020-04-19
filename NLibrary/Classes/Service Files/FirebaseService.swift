@@ -15,6 +15,10 @@ public enum APIRequestResult: Error {
     case succesfullRequest
 }
 
+public enum APIFailureResult: Error {
+    case failedRequest(message: String)
+}
+
 @objc public class FirebaseService: NSObject, FirebaseServiceProtocol {
     private let ref: DatabaseReference! = Database.database().reference()
     private var repo: SignUpRepoProtocol?
@@ -23,6 +27,9 @@ public enum APIRequestResult: Error {
     private var repoDashBoard: DashboardRepoProtocol?
     private var repoPlaylist: PlaylistRepo?
 
+    public required override init() {
+
+    }
     public required init(repo: SignUpRepoProtocol) {
         self.repo = repo
     }
@@ -236,9 +243,10 @@ public enum APIRequestResult: Error {
                 // TO DO: name could not be loaded
                 return
             }
-//TO DO: Refactor to profile            self?.repoDashBoard!.successFulNameRequest(dictionary: value!)
         })
     }
+//completion: @escaping (Result<Bool, Error>) -> Void)
+
 
     public func getRecentSongsToDashboard() {
         guard let currentUser = Auth.auth().currentUser else {

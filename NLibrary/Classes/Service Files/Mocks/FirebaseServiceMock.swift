@@ -9,6 +9,10 @@
 import Foundation
 
 public class FirebaseServiceMock: NSObject, FirebaseServiceProtocol {
+    public required override init() {
+        
+    }
+    
     public func getUserPlaylistDetails() {
 
     }

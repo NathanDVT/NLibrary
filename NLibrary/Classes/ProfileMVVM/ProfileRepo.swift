@@ -30,10 +30,8 @@ public class ProfileRepo: ProfileRepoProtocol {
             // TO DO: cancel observers hanging
             try Auth.auth().signOut()
             completion(.succesfullRequest)
-        } catch (let error){
+        } catch let error {
             completion(.failedRequest(message: error.localizedDescription))
         }
     }
-    
-    
 }

@@ -28,7 +28,7 @@ public enum APIFailureResult: Error {
     private var repoPlaylist: PlaylistRepo?
 
     public required override init() {
-        
+
     }
     public required init(repo: SignUpRepoProtocol) {
         self.repo = repo

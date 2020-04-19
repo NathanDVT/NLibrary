@@ -9,7 +9,6 @@
 import Foundation
 import AVKit
 
-
 public protocol ProfileRepoProtocol: class {
     init ()
     func getUserProfile(completion: @escaping(Result<ProfileModel, APIFailureResult>) -> Void)

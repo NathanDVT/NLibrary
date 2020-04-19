@@ -14,14 +14,12 @@ public class ProfileMockViewModel: ProfileViewModelProtocol {
     public var getUserProfileCalled: Bool = false
     public required init(viewController: ProfileViewControllerProtocol, repo: ProfileRepoProtocol) {
     }
-    
+
     public func getUserProfile() {
         getUserProfileCalled = true
     }
-    
+
     public func logoutRequest() {
         logoutRequestCalled = true
     }
-    
-    
 }

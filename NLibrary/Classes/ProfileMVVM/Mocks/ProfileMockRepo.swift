@@ -23,7 +23,7 @@ public class ProfileMockRepo: ProfileRepoProtocol {
                 "gender": Gender.male.stringValue,
                 "name": "name",
                 "email": "email",
-                "Playlists": ["1":"x", "2": "x"]
+                "Playlists": ["1": "x", "2": "x"]
             ]
             completion(.success(ProfileModel(dictionary: dictionary)))
         }
@@ -31,7 +31,7 @@ public class ProfileMockRepo: ProfileRepoProtocol {
 
     public func logoutRequest(completion: @escaping(APIRequestResult) -> Void) {
         switch closurePathway {
-        case .failedRequest(_):
+        case .failedRequest:
             completion(.failedRequest(message: "failed logoutRequest"))
         case .succesfullRequest:
             completion(.succesfullRequest)

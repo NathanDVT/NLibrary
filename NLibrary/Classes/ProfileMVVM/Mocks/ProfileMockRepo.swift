@@ -16,7 +16,7 @@ public class ProfileMockRepo: ProfileRepoProtocol {
 
     public func getUserProfile(completion: @escaping(Result<ProfileModel, APIFailureResult>) -> Void) {
         switch closurePathway {
-        case .failedRequest(_):
+        case .failedRequest:
             completion(.failure(.failedRequest(message: "failed getUserProfile")))
         case .succesfullRequest:
             let dictionary: NSDictionary = [

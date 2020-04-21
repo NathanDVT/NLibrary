@@ -12,7 +12,7 @@ public class ProfileViewModel: ProfileViewModelProtocol {
         self.profileRepo.getUserProfile { [weak self] result in
             switch result {
             case .failure(.failedRequest(let message)):
-                print(message)
+                self?.viewController.failedProfileRequest(errorMessage: message)
             case .success(let profileModel):
                 self?.viewController.successfulRequest(profileModel: profileModel)
             }
@@ -22,7 +22,7 @@ public class ProfileViewModel: ProfileViewModelProtocol {
         self.profileRepo.logoutRequest { [weak self] result in
                 switch result {
                 case .failedRequest(let message):
-                    print(message)
+                    self?.viewController.failedLogoutRequest(errorMessage: message)
                 case .succesfullRequest:
                     self?.viewController.successfulLogout()
             }

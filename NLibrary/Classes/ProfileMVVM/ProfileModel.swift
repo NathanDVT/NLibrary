@@ -26,9 +26,10 @@ public struct ProfileModel {
 
     var dict: [String: Any] {
         return [
-            "uid": gender,
-            "name": email,
-            "email": noPlaylists
+            "gender": gender.stringValue,
+            "name": name,
+            "email": email,
+            "noPlaylists": noPlaylists
         ]
     }
 

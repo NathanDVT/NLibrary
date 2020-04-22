@@ -31,7 +31,7 @@ public class MusicControllerViewModel {
     }
 
     public func isPlaying() -> Bool {
-        return musicPlayer.rate != 0;
+        return musicPlayer.rate != 0
     }
 
     public func pauseOrPlayCurrentSong() {

@@ -9,7 +9,7 @@
 import Foundation
 import AVKit
 
-public class MusicControllerViewModel {
+public class MusicBarViewModel {
     lazy var musicPlayer: AVPlayer = {return AVPlayer()}()
     public private(set) var name: String = "Select song to play"
 

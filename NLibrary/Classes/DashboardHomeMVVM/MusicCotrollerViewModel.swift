@@ -11,7 +11,7 @@ import AVKit
 
 public class MusicControllerViewModel {
     lazy var musicPlayer: AVPlayer = {return AVPlayer()}()
-    var name: String = "Select song to play"
+    public private(set) var name: String = "Select song to play"
 
     public init() {
     }
@@ -24,10 +24,6 @@ public class MusicControllerViewModel {
         self.musicPlayer.replaceCurrentItem(with: playerItem)
         musicPlayer.play()
         self.name = title
-    }
-
-    public func getArtistName() -> String {
-        return name
     }
 
     public func isPlaying() -> Bool {

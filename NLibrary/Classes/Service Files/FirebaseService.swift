@@ -237,7 +237,7 @@ public enum APIFailureResult: Error {
         guard let currentUser = Auth.auth().currentUser else {
             return
         }
-        self.ref.child("users/\(currentUser.uid)").observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+        self.ref.child("users/\(currentUser.uid)").observeSingleEvent(of: .value, with: { /*[weak self]*/ (snapshot) in
             let value = snapshot.value as? NSDictionary
             guard value != nil else {
                 // TO DO: name could not be loaded
@@ -245,8 +245,6 @@ public enum APIFailureResult: Error {
             }
         })
     }
-//completion: @escaping (Result<Bool, Error>) -> Void)
-
 
     public func getRecentSongsToDashboard() {
         guard let currentUser = Auth.auth().currentUser else {
@@ -278,7 +276,6 @@ public enum APIFailureResult: Error {
         do {
             // TO DO: cancel observers hanging
             try Auth.auth().signOut()
-            self.repoDashBoard!.successfulLogOut()
         } catch {
         }
     }

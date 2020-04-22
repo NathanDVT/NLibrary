@@ -11,12 +11,12 @@ import AVKit
 
 public class MusicControllerViewModel {
     lazy var musicPlayer: AVPlayer = {return AVPlayer()}()
-    var name: String = "Select Artist!!!"
+    var name: String = "Select song to play"
 
     public init() {
     }
 
-    public func playFromUrl(urlString: String, title: String) {
+    public func playFromUrlWithTitle(urlString: String, title: String) {
             guard let url = URL.init(string: urlString) else {
             return
         }

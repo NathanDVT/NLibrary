@@ -15,8 +15,6 @@ public protocol DashboardRepoProtocol: class {
 //TO DO: Refactor to profile screen    func successFulNameRequest(dictionary: NSDictionary)
     func successFulRecentPlaylistRequest(dictionary: NSDictionary)
     func setServiceProvider(service: FirebaseServiceProtocol)
-    func logoutRequest()
-    func successfulLogOut()
     func getTrending(completion: @escaping (Result<[TrendingArtistModel], Error>) -> Void)
     func postTrending(trendingArtists: TrendingArtistModel,
     completion: @escaping (Result<Bool, Error>) -> Void)

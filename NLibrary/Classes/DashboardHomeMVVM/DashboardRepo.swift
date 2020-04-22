@@ -38,9 +38,6 @@ public class DashboardRepo: DashboardRepoProtocol {
     public func logoutRequest() {
         self.firebaseService.logout()
     }
-    public func successfulLogOut() {
-        self.viewModel?.successfulLogOut()
-    }
 
     private var repo: TrendingArtistRepo?
     public required init (view: UIViewController, repo: TrendingArtistRepo) {

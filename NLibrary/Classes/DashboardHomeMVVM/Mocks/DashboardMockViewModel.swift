@@ -19,7 +19,6 @@ public class DashboardMockViewModel: DashboardViewModelProtocol {
     }
     
     public func logoutRequest() {
-        repo?.logoutRequest()
     }
 
     public func successfulLogOut() {

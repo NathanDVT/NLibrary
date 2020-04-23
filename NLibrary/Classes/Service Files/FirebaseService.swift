@@ -262,14 +262,14 @@ public enum APIFailureResult: Error {
     }
 
     public func getUserPlaylistDetails() {
-        guard let currentUser = Auth.auth().currentUser else {
-            return
-        }
-        self.ref.child("Playlists/\(currentUser.uid)")
-            .observe(.value, with: { [weak self] (snapshot) in
-                let value = [snapshot.key: snapshot.value!] as NSDictionary
-            self?.repoPlaylist!.successfulGetUserPlaylists(dictionary: value)
-        })
+//        guard let currentUser = Auth.auth().currentUser else {
+//            return
+//        }
+//        self.ref.child("Playlists/\(currentUser.uid)")
+//            .observe(.value, with: { [weak self] (snapshot) in
+//                let value = [snapshot.key: snapshot.value!] as NSDictionary
+//            self?.repoPlaylist!.successfulGetUserPlaylists(dictionary: value)
+//        })
     }
 
     public func logout() {

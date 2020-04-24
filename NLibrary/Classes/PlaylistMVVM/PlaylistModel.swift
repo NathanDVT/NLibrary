@@ -9,26 +9,6 @@
 import Foundation
 import AVKit
 
-public struct PlaylistBasicModel {
-//    public var playlistItems: [PlaylistModel] = []
-//    public var authorId: String?
-//    init?(dict: NSDictionary) {
-//        guard let keyValues = dict.allValues.first as? NSDictionary,
-//            let authorId = dict.allKeys.first as? String else {
-//            return
-//        }
-//        self.authorId = authorId
-//        for (key, value) in keyValues {
-//            guard let key = key as? String,
-//                let page = value as? NSDictionary else {
-//                return
-//            }
-//            playlistItems.append(PlaylistModel(albumName: key, dictionary: page))
-//        }
-//    }
-//    var dict: [String: Any]?
-}
-
 public struct PlaylistModel {
     public var playlistId: String = ""
     public var playlistName: String = ""

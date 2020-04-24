@@ -31,16 +31,21 @@ public class PlaylistRepo {
         guard let currentUser = Auth.auth().currentUser else {
              return
          }
-         self.ref.child("Playlists/\(currentUser.uid)")
-             .observe(.value, with: { [weak self] (snapshot) in
-                guard let snaptshotValue = snapshot.value else {
-                    return
+         self.ref.child("playlists")
+            .queryOrdered(byChild: "producerId")
+            .queryEqual(toValue: currentUser.uid)
+            .observe(.value, with: { /*[weak self]*/ (snapshot) in
+                var playlists: [PlaylistModel] = []
+                for child in snapshot.children {
+                    guard let childSnap = child as? DataSnapshot,
+                        let childValue = childSnap.value else {
+                        return
+                    }
+                    let value = [childSnap.key: childValue] as NSDictionary
+                    playlists.append( PlaylistModel(dictionary: value))
+                    print (playlists)
                 }
-                let value = [snapshot.key: snaptshotValue] as NSDictionary
-                guard let playlistModel: PlaylistBasicModel = PlaylistBasicModel(dict: value) else {
-                    return
-                }
-                self?.viewModel?.successfulRequest(playlist: playlistModel)
+                self.viewModel?.successfulRequest(playlistModels: playlists)
          })
     }
 

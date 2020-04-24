@@ -33,16 +33,15 @@ public class PlaylistRepo {
          }
          self.ref.child("Playlists/\(currentUser.uid)")
              .observe(.value, with: { [weak self] (snapshot) in
-                let value = [snapshot.key: snapshot.value!] as NSDictionary
-                let playlistModel: PlaylistBasicModel? = PlaylistBasicModel(dict: value)
-                self?.viewModel?.successfulRequest(playlist: playlistModel!)
+                guard let snaptshotValue = snapshot.value else {
+                    return
+                }
+                let value = [snapshot.key: snaptshotValue] as NSDictionary
+                guard let playlistModel: PlaylistBasicModel = PlaylistBasicModel(dict: value) else {
+                    return
+                }
+                self?.viewModel?.successfulRequest(playlist: playlistModel)
          })
-    }
-
-    public func successfulGetUserPlaylists(dictionary: NSDictionary) {
-//        var recentSongModels: [PlaylistItemBasicModel] = []
-//        var playlistModel: PlaylistBasicModel? = PlaylistBasicModel(dict: dictionary)
-//        viewModel?.successfulRequest(songs: playlistModel!.playlistItems)
     }
 
     public func createPlaylist(playlistName: String) {

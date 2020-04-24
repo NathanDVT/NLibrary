@@ -16,7 +16,7 @@ public struct PlaylistModel {
     public var producerId: String = ""
     public var numSongs: Int = 0
     public var basicSongItems: [BasicSongItem] = []
-    
+
     init(dictionary: NSDictionary) {
         guard let dictionary = dictionary.allValues.first as? [String: Any],
             let playlistId = dictionary["playlistId"] as? String,

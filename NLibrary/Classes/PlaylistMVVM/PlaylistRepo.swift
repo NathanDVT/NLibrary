@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import FirebaseAuth
+import FirebaseDatabase
 import AVKit
 
 public class PlaylistRepo {
+    private let ref: DatabaseReference! = Database.database().reference()
     var viewModel: PlaylistViewModel?
     lazy var firebaseService: FirebaseService = {return FirebaseService(repo: self)}()
 
@@ -25,19 +28,20 @@ public class PlaylistRepo {
     }
 
     public func getUserPlaylistDetails() {
-        firebaseService.getUserPlaylistDetails()
-    }
-
-    public func successfulGetUserPlaylists(dictionary: NSDictionary) {
-        var recentSongModels: [PlaylistDetailModel] = []
-        guard let keyValues = dictionary.allValues.first as? [String: Any] else {
-            return
-        }
-        for (key, value) in keyValues {
-            guard let songsDictionary = value as? [String: Any] else { return }
-            recentSongModels.append(PlaylistDetailModel(name: key, numSongs: songsDictionary.count))
-        }
-        viewModel?.successfulRequest(songs: recentSongModels)
+        guard let currentUser = Auth.auth().currentUser else {
+             return
+         }
+         self.ref.child("Playlists/\(currentUser.uid)")
+             .observe(.value, with: { [weak self] (snapshot) in
+                guard let snaptshotValue = snapshot.value else {
+                    return
+                }
+                let value = [snapshot.key: snaptshotValue] as NSDictionary
+                guard let playlistModel: PlaylistBasicModel = PlaylistBasicModel(dict: value) else {
+                    return
+                }
+                self?.viewModel?.successfulRequest(playlist: playlistModel)
+         })
     }
 
     public func createPlaylist(playlistName: String) {

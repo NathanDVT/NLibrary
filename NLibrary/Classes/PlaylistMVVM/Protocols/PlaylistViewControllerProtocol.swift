@@ -10,5 +10,5 @@ import Foundation
 import AVKit
 
 public protocol PlaylistViewControllerProtocol: class {
-    func successfulRequest(songs: [PlaylistDetailModel])
+    func successfulRequest(playlistsviewModel: PlaylistBasicModel)
 }

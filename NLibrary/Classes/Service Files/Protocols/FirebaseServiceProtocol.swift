@@ -47,5 +47,4 @@ public protocol FirebaseServiceProtocol: NSObject {
 //    func getUserProfile(completion: @escaping(Result<NSDictionary, APIRequestResult>) -> Void)
     func logout()
     func getUserPlaylistsNames()
-    func getUserPlaylistDetails()
 }

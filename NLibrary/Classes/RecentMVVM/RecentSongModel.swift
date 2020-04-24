@@ -13,10 +13,12 @@ public struct RecentSongModel: DictionaryConvertible {
     var artistName: String = "N/A"
     var titleName: String = "N/A"
     var previewUrl: String = "N/A"
+    var artworkUrl60: String = ""
     var dict: [String: Any] {
         return [
             "artistName": artistName,
             "titleName": titleName,
+            "artworkUrl60": artworkUrl60,
             "previewUrl": previewUrl
         ]
     }
@@ -43,6 +45,7 @@ public struct RecentSongModel: DictionaryConvertible {
          */
         guard let arName = dictionary.value(forKey: "artistName") as? String,
         let titName = dictionary.value(forKey: "titleName") as? String,
+        let artworkUrl = dictionary.value(forKey: "artworkUrl60") as? String,
         let preUrl = dictionary.value(forKey: "previewUrl") as? String else {
             return
         }
@@ -50,5 +53,6 @@ public struct RecentSongModel: DictionaryConvertible {
         artistName = arName
         titleName = titName
         previewUrl = preUrl
+        artworkUrl60 = artworkUrl
     }
 }

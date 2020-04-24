@@ -13,6 +13,7 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
         recentSong.artistName = selectedSong.artistName
         recentSong.previewUrl = selectedSong.previewUrl
         recentSong.titleName = selectedSong.titleName
+        recentSong.artworkUrl60 = selectedSong.artworkUrl60
         repo?.addSongToPlaylist(playlistName: playlistName, songDTO: recentSong)
     }
 

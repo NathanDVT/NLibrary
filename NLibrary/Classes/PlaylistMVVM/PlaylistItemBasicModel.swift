@@ -10,7 +10,7 @@ import Foundation
 import AVKit
 
 public struct PlaylistBasicModel {
-    public var playlistItems: [PlaylistItemBasicModel] = []
+    public var playlistItems: [PlaylistModel] = []
     public var authorId: String?
     init?(dict: NSDictionary) {
         guard let keyValues = dict.allValues.first as? NSDictionary,
@@ -23,13 +23,13 @@ public struct PlaylistBasicModel {
                 let page = value as? NSDictionary else {
                 return
             }
-            playlistItems.append(PlaylistItemBasicModel(albumName: key, dictionary: page))
+            playlistItems.append(PlaylistModel(albumName: key, dictionary: page))
         }
     }
     var dict: [String: Any]?
 }
 
-public struct PlaylistItemBasicModel {
+public struct PlaylistModel {
     public var listid: String = ""
     public var name: String = ""
     public var numSongs: Int = 0

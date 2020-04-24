@@ -73,7 +73,7 @@ public class SearchSongRepo: SearchSongRepoProtocol {
             guard let page = value as? [String: String] else {
                 return
             }
-            guard let playlistName: String = page["playlistId"] else {
+            guard let playlistName: String = page["playlistName"] else {
                 return
             }
             names.append(playlistName)

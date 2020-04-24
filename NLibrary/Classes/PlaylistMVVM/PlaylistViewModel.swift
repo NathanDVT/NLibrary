@@ -28,8 +28,8 @@ public class PlaylistViewModel {
     public func unsuccessfulRequest(errorMessage: String) {
     }
 
-    public func successfulRequest(playlist: PlaylistBasicModel) {
-        self.viewController?.successfulRequest(playlistsviewModel: playlist)
+    public func successfulRequest(playlistModels: [PlaylistModel]) {
+        self.viewController?.successfulRequest(playlistModels: playlistModels)
     }
 
     private func convertToViewModel(songs: [SearchSongModel]) {

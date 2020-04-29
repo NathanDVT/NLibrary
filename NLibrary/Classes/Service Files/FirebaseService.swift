@@ -270,7 +270,7 @@ public enum APIFailureResult: Error {
         guard let currentUser = Auth.auth().currentUser else {
             return
         }
-        self.ref.child("playlists/\(currentUser.uid)/Recent")
+        self.ref.child("playlists/Recent~\(currentUser.uid)/songs")
             .queryOrderedByKey().queryLimited(toLast: 3).observe(.value, with: { [weak self] (snapshot) in
             let value = snapshot.value as? NSDictionary
             guard value != nil else {

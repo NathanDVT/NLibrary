@@ -6,7 +6,7 @@
 //  Copyright © 2020 Nathan Ngobale. All rights reserved.
 //
 
-public protocol SeearchMusicTableViewControllerProtocol: class {
+public protocol SearchViewControllerProtocol: class {
     func successfulRequest()
     func unsuccessfulRequest(errorMessage: String)
     func successFulRecentSongsReceived(playlistNames: [String])

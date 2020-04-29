@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol SearchSongsViewModelProtocol: class {
-    init (view: SeearchMusicTableViewControllerProtocol, repo: SearchSongRepoProtocol)
+    init (view: SearchViewControllerProtocol, repo: SearchSongRepoProtocol)
     func getCollections(artistName: String)
     func successfulRequest(songs: [SearchSongModel])
     func unsuccessfulRequest(errorMessage: String)

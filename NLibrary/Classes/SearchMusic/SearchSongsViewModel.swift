@@ -32,10 +32,10 @@ public class SearchSongsViewModel: SearchSongsViewModelProtocol {
     private var results: [SearchSongDetail]
     private var playlistNames: [String] = []
     private var repo: SearchSongRepoProtocol?
-    weak var viewController: SeearchMusicTableViewControllerProtocol?
+    weak var viewController: SearchViewControllerProtocol?
 
     public var listOfArtistCollections = [SearchSongModel]()
-    public required init (view: SeearchMusicTableViewControllerProtocol, repo: SearchSongRepoProtocol) {
+    public required init (view: SearchViewControllerProtocol, repo: SearchSongRepoProtocol) {
         self.results = []
         self.repo = repo
         self.viewController = view

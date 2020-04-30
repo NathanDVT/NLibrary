@@ -206,19 +206,7 @@ public enum APIFailureResult: Error {
             }
         })
     }
-//    let playlistId = "\(playlistName)~\(currentUser.uid)"
-//    self.ref.child("playlists")
-//        .queryOrdered(byChild: "playlistId")
-//        .queryEqual(toValue: playlistId)
-//        .observeSingleEvent(of: .value, with: { (snapshot) in
-//            for snapchild in snapshot.children {
-//                guard let snapchild = snapchild as? DataSnapshot else {
-//                    return
-//                }
-//                snapchild.ref.child("songs").childByAutoId().setValue(songDTO.dict)
-//            }
-//        })
-//     }
+
     private func removeSongFromRecent(playlistName: String,
                                       song: RecentSongModel,
                                       completion: @escaping(APIRequestResult) -> Void) {

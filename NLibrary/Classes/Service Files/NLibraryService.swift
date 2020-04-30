@@ -30,7 +30,7 @@ import Foundation
     }
     
     public func getTrending(completion: @escaping (Result<Data, Error>) -> Void) throws {
-        let resourceString = "http://localhost:8080"
+        let resourceString = "https://musico-ios-app.herokuapp.com"
         guard let resourceURL = URL(string: resourceString)
             else { throw ArtistMediaError.invalidName }
         self.resourceURL = resourceURL
@@ -45,7 +45,7 @@ import Foundation
     }
 
     public func postTrending(trendingArtist: TrendingArtistModel, completion : @escaping (Result<Data, Error>) -> Void) {
-        let url = URL(string: "http://localhost:8080")
+        let url = URL(string: "https://musico-ios-app.herokuapp.com")
         guard let requestUrl = url else { fatalError() }
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "POST"
